@@ -10,15 +10,15 @@ suspend fun <T> getResponse(
     Response.Error()
 }
 
-fun <T> Response<T>.toDataOrNull() : T? {
-    return when(this) {
+fun <T> Response<T>.toDataOrNull(): T? {
+    return when (this) {
         is Response.Success -> data
         else -> null
     }
 }
 
 fun <T> Response<T>.toErrorCode(): Int? {
-    return when(this) {
+    return when (this) {
         is Response.Error -> errorCode
         else -> null
     }
