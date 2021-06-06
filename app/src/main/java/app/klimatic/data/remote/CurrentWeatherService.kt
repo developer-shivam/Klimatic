@@ -9,5 +9,5 @@ interface CurrentWeatherService {
     @GET("/v1/current.json")
     fun fetchCurrentWeather(
         @Query("q") query: String?
-    ) : Observable<CurrentWeatherResponse>
+    ) : CurrentWeatherResponse
 }

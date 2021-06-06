@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Klimatic</string>
+    <string name="error_code_generic">Something went wrong</string>
+
 </resources>
