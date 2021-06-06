@@ -28,4 +28,5 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun performDependencyInjection(activityComponent: ActivityComponent)
 
     abstract fun setupView(savedInstanceState: Bundle?)
+
 }

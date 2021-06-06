@@ -15,7 +15,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'BASE_URL', '"https://api.weatherapi.com/"'
@@ -34,6 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    kapt {
+        generateStubs = true
+    }
+
+
 }
 
 dependencies {
@@ -56,21 +61,26 @@ dependencies {
     def materialLibraryVersion = "1.3.0"
     implementation "com.google.android.material:material:$materialLibraryVersion"
 
+    //Lifecycle
+    def lifeCycleVersion = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifeCycleVersion"
+    def viewModelVersion = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelVersion"
+    def liveDataKtxVersion = "2.4.0-alpha01"
+    implementation  "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
+
+    //multidex
+    implementation 'com.android.support:multidex:1.0.3'
+
     /* Image Loading */
     def glideVersion = "4.11.0"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     /* Dependency Injection */
-    def dagger2Version = "2.10"
+    def dagger2Version = "2.28.3"
     implementation "com.google.dagger:dagger:$dagger2Version"
     kapt "com.google.dagger:dagger-compiler:$dagger2Version"
-
-    /* Reactive */
-    def rxAndroidVersion = "2.1.0"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-    def rxJavaVersion = "2.2.9"
-    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
     /* Networking */
     def retrofitVersion = "2.9.0"
@@ -78,7 +88,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     def rxJavaAdapterVersion = "2.6.1"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rxJavaAdapterVersion"
-    def loggingInterceptorVersion = "4.8.1"
+    def loggingInterceptorVersion = "4.9.1"
     implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 
     /* Unit Testing */
