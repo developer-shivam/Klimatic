@@ -11,6 +11,7 @@ import app.klimatic.ui.weather.domain.WeatherDataRepository
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(private val repository: WeatherDataRepository): ViewModel() {
+
     val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse?>>()
 
     fun fetchCurrentWeather(query: String) {

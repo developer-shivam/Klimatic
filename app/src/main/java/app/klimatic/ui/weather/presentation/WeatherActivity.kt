@@ -1,24 +1,16 @@
 package app.klimatic.ui.weather.presentation
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import app.klimatic.R
-import app.klimatic.data.remote.CurrentWeatherService
 import app.klimatic.di.components.ActivityComponent
 import app.klimatic.ui.base.BaseActivity
-import java.util.*
-import javax.inject.Inject
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import app.klimatic.ui.utils.ErrorUtils
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.ui.utils.toast
-import app.klimatic.ui.weather.domain.WeatherDataRepository
-import app.klimatic.ui.weather.domain.WeatherDataRepositoryImpl
+import javax.inject.Inject
 
 class WeatherActivity : BaseActivity() {
-
-    @Inject
-    lateinit var currentWeatherService: CurrentWeatherService
 
     override fun getLayoutResource(): Int = R.layout.activity_weather
 
@@ -26,7 +18,7 @@ class WeatherActivity : BaseActivity() {
         activityComponent.inject(this)
     }
 
-    //inject viewmodel
+    @Inject
     lateinit var weatherViewModel: WeatherViewModel
 
     override fun setupView(savedInstanceState: Bundle?) {
