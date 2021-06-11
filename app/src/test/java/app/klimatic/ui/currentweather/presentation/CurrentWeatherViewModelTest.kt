@@ -12,7 +12,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.anyString
 import org.mockito.Mockito.doReturn
@@ -52,7 +51,7 @@ class SingleNetworkCallViewModelTest {
 
             viewModel.weatherListener.observeForever(weatherObserver)
 
-            viewModel.fetchCurrentWeather(ArgumentMatchers.anyString())
+            viewModel.fetchCurrentWeather(anyString())
 
             verify(currentWeatherDataRepository).fetchCurrentWeather(anyString())
             verify(weatherObserver).onChanged(ViewState.Success(currentWeatherResponse))
@@ -73,7 +72,7 @@ class SingleNetworkCallViewModelTest {
 
             viewModel.weatherListener.observeForever(weatherObserver)
 
-            viewModel.fetchCurrentWeather(ArgumentMatchers.anyString())
+            viewModel.fetchCurrentWeather(anyString())
 
             verify(currentWeatherDataRepository).fetchCurrentWeather(anyString())
             verify(weatherObserver).onChanged(ViewState.Error(mockedErrorCode))
