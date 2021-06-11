@@ -8,6 +8,8 @@ import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -39,6 +41,14 @@ class SingleNetworkCallViewModelTest {
 
     var mockedErrorCode: Int = 0
 
+    private lateinit var viewModel: CurrentWeatherViewModel
+
+    @Before
+    fun setup() {
+        viewModel = CurrentWeatherViewModel(currentWeatherDataRepository)
+        viewModel.weatherListener.observeForever(weatherObserver)
+    }
+
     @Test
     fun givenSuccessResponse_whenFetchCurrentWeather_shouldReturnSuccess() {
         testCoroutineRule.runBlockingTest {
@@ -47,16 +57,10 @@ class SingleNetworkCallViewModelTest {
                 .`when`(currentWeatherDataRepository)
                 .fetchCurrentWeather(anyString())
 
-            val viewModel = CurrentWeatherViewModel(currentWeatherDataRepository)
-
-            viewModel.weatherListener.observeForever(weatherObserver)
-
             viewModel.fetchCurrentWeather(anyString())
 
             verify(currentWeatherDataRepository).fetchCurrentWeather(anyString())
             verify(weatherObserver).onChanged(ViewState.Success(currentWeatherResponse))
-
-            viewModel.weatherListener.removeObserver(weatherObserver)
         }
     }
 
@@ -68,16 +72,15 @@ class SingleNetworkCallViewModelTest {
                 .`when`(currentWeatherDataRepository)
                 .fetchCurrentWeather(anyString())
 
-            val viewModel = CurrentWeatherViewModel(currentWeatherDataRepository)
-
-            viewModel.weatherListener.observeForever(weatherObserver)
-
             viewModel.fetchCurrentWeather(anyString())
 
             verify(currentWeatherDataRepository).fetchCurrentWeather(anyString())
             verify(weatherObserver).onChanged(ViewState.Error(mockedErrorCode))
-
-            viewModel.weatherListener.removeObserver(weatherObserver)
         }
+    }
+
+    @After
+    fun clear() {
+        viewModel.weatherListener.removeObserver(weatherObserver)
     }
 }
