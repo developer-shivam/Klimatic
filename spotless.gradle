@@ -29,6 +29,7 @@ task createSpotlessPreCommitHook() {
     #!/bin/bash
     echo "Running spotless check"
     ./gradlew spotlessApply
+    git add .
 """
     "chmod +x .git/hooks/pre-commit".execute()
 }
