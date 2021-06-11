@@ -6,12 +6,14 @@ import app.klimatic.di.qualifiers.ApiKey
 import app.klimatic.di.scopes.ApplicationScope
 import dagger.Module
 import dagger.Provides
-import okhttp3.*
+import okhttp3.HttpUrl
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 @Module
 class NetworkModule {
@@ -55,7 +57,10 @@ class NetworkModule {
 
     @ApplicationScope
     @Provides
-    fun provideOkHttpClient(authenticationInterceptor: Interceptor, httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(
+        authenticationInterceptor: Interceptor,
+        httpLoggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(authenticationInterceptor)
             .addNetworkInterceptor(httpLoggingInterceptor)

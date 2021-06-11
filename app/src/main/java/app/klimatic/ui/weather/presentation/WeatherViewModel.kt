@@ -10,7 +10,7 @@ import app.klimatic.ui.utils.toDataOrNull
 import app.klimatic.ui.weather.domain.WeatherDataRepository
 import kotlinx.coroutines.launch
 
-class WeatherViewModel(private val repository: WeatherDataRepository): ViewModel() {
+class WeatherViewModel(private val repository: WeatherDataRepository) : ViewModel() {
 
     val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse?>>()
 

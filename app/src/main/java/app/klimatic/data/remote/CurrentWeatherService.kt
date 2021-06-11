@@ -8,5 +8,5 @@ interface CurrentWeatherService {
     @GET("/v1/current.json")
     suspend fun fetchCurrentWeather(
         @Query("q") query: String?
-    ) : CurrentWeatherResponse
+    ): CurrentWeatherResponse
 }

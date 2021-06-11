@@ -28,12 +28,10 @@ class WeatherActivity : BaseActivity() {
 
     private fun observe() {
         weatherViewModel.weatherListener.observe(this, Observer {
-            when(it) {
-                is ViewState.Success -> { toast(it.data.toString())}
-                is ViewState.Error -> { toast(ErrorUtils.resolveErrorCode(it.code))}
+            when (it) {
+                is ViewState.Success -> { toast(it.data.toString()) }
+                is ViewState.Error -> { toast(ErrorUtils.resolveErrorCode(it.code)) }
             }
         })
     }
-
-
 }

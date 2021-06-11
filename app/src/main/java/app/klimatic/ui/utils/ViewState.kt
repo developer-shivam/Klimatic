@@ -6,7 +6,7 @@ sealed class ViewState<ResultType> {
 
     data class Success<ResultType>(
         val data: ResultType
-    ): ViewState<ResultType>()
+    ) : ViewState<ResultType>()
 
     data class Error<ResultType>(
         val code: Int? = ERROR_CODE_GENERIC
