@@ -7,8 +7,8 @@ import app.klimatic.R
 import app.klimatic.di.components.ActivityComponent
 import app.klimatic.ui.base.BaseFragment
 import app.klimatic.ui.utils.ViewState
-import kotlinx.android.synthetic.main.fragment_weather.*
 import javax.inject.Inject
+import kotlinx.android.synthetic.main.fragment_weather.*
 
 class CurrentWeatherFragment : BaseFragment() {
 
@@ -17,7 +17,7 @@ class CurrentWeatherFragment : BaseFragment() {
 
     companion object {
 
-        fun create() : CurrentWeatherFragment {
+        fun create(): CurrentWeatherFragment {
             // No arguments as of now. So returning instance right away
             return CurrentWeatherFragment()
         }
@@ -43,16 +43,12 @@ class CurrentWeatherFragment : BaseFragment() {
                     }
                 }
                 is ViewState.Error -> {
-
                 }
                 is ViewState.StartLoading -> {
-
                 }
                 is ViewState.HideLoading -> {
-
                 }
             }
         })
     }
-
 }
