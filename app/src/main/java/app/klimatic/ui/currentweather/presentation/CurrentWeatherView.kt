@@ -18,27 +18,27 @@ class CurrentWeatherView @JvmOverloads constructor(
     private var view = LayoutInflater.from(context)
         .inflate(R.layout.layout_current_weather, this, true)
 
-    fun setCurrentWeatherData(currentWeatherResponse: CurrentWeatherResponse) {
+    fun setCurrentWeatherData(currentWeatherResponse: CurrentWeatherResponse?) {
 
-        currentWeatherResponse.location?.apply {
+        view.run {
+            val location = currentWeatherResponse?.location
+            tvLocation.text =
+                    context.getString(R.string.two_place_text, location?.name, location?.country)
 
-            view.tvLocation.text = String.format("%s, %s", name, country)
-        }
+            val current = currentWeatherResponse?.current
+            val condition = current?.condition
 
-        currentWeatherResponse.current?.apply {
-
-            condition?.apply {
-                Glide.with(context).load("https:$icon")
+            Glide.with(context).load(context.getString(R.string.https_link, condition?.icon))
                     .into(view.ivCurrentWeatherCondition)
-                view.tvCurrentWeatherCondition.text = text
-            }
 
-            view.tvCurrentTemp.text = String.format("%s °C", tempC)
+            tvCurrentWeatherCondition.text = condition?.text
+            tvCurrentTemp.text = context.getString(R.string.temp_c, current?.tempC)
+            tvWindSpeedValue.text = context.getString(R.string.wind_kph, current?.windKph)
 
-            view.tvWindSpeedValue.text = String.format("%s k/h", windKph)
-            view.tvWindDirectionValue.text = String.format("%d° %s", windDegree, windDir)
-
-            view.tvHumidityValue.text = humidity?.toString()
+            tvWindDirectionValue.text =
+                    context.getString(R.string.two_place_text, current?.windDegree.toString(),
+                            current?.windDir)
+            tvHumidityValue.text = current?.humidity.toString()
         }
     }
 }
