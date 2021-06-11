@@ -1,20 +1,26 @@
-package app.klimatic.ui.weather.presentation
+package app.klimatic.ui.currentweather.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.klimatic.data.remote.CurrentWeatherResponse
+import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.ui.utils.toDataOrNull
-import app.klimatic.ui.weather.domain.WeatherDataRepository
+import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
 import kotlinx.coroutines.launch
 
-class WeatherViewModel(private val repository: WeatherDataRepository) : ViewModel() {
+class CurrentWeatherViewModel(private val repository: CurrentWeatherDataRepository): ViewModel() {
 
     val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse?>>()
 
-    fun fetchCurrentWeather(query: String) {
+    /**
+     * query possible values
+     * 1. Latitude and Longitude (Decimal degree) e.g: query=48.8567,2.3508
+     * 2. city name e.g.: query=Delhi
+     * 3. auto:ip IP lookup e.g: query=auto:ip (No location permission needed)
+     * */
+    fun fetchCurrentWeather(query: String = "auto:ip") {
         viewModelScope.launch {
             val viewState: ViewState<CurrentWeatherResponse?> =
                 when (val response = repository.fetchCurrentWeather(query)) {

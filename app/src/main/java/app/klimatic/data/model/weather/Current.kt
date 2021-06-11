@@ -1,4 +1,4 @@
-package app.klimatic.data.model
+package app.klimatic.data.model.weather
 
 import com.google.gson.annotations.SerializedName
 

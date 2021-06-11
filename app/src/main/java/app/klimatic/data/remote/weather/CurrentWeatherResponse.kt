@@ -1,7 +1,7 @@
-package app.klimatic.data.remote
+package app.klimatic.data.remote.weather
 
-import app.klimatic.data.model.Current
-import app.klimatic.data.model.Location
+import app.klimatic.data.model.weather.Current
+import app.klimatic.data.model.weather.Location
 import com.google.gson.annotations.SerializedName
 
 data class CurrentWeatherResponse(

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Klimatic</string>
     <string name="error_code_generic">Something went wrong</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_direction">Wind Direction</string>
+    <string name="humidity">Humidity</string>
 
 </resources>

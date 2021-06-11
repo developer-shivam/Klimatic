@@ -1,7 +1,7 @@
 package app.klimatic.di.modules
 
 import app.klimatic.BuildConfig
-import app.klimatic.data.remote.CurrentWeatherService
+import app.klimatic.data.remote.weather.CurrentWeatherService
 import app.klimatic.di.qualifiers.ApiKey
 import app.klimatic.di.scopes.ApplicationScope
 import dagger.Module
