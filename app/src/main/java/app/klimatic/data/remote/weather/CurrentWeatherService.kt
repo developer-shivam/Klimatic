@@ -1,4 +1,4 @@
-package app.klimatic.data.remote
+package app.klimatic.data.remote.weather
 
 import retrofit2.http.GET
 import retrofit2.http.Query

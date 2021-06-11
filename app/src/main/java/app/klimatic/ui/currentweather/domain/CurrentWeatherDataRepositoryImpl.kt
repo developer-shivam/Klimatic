@@ -1,12 +1,12 @@
-package app.klimatic.ui.weather.domain
+package app.klimatic.ui.currentweather.domain
 
-import app.klimatic.data.remote.CurrentWeatherService
+import app.klimatic.data.remote.weather.CurrentWeatherService
 import app.klimatic.ui.utils.getResponse
 import javax.inject.Inject
 
-class WeatherDataRepositoryImpl @Inject constructor(
+class CurrentWeatherDataRepositoryImpl @Inject constructor(
     private val weatherService: CurrentWeatherService
-) : WeatherDataRepository {
+) : CurrentWeatherDataRepository {
 
     override suspend fun fetchCurrentWeather(query: String) = getResponse {
         weatherService.fetchCurrentWeather(query)
