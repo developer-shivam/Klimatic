@@ -11,6 +11,7 @@
     <dimen name="text24">24sp</dimen>
     <dimen name="text48">48sp</dimen>
 
+    <dimen name="dimen0">0dp</dimen>
     <dimen name="dimen2">2dp</dimen>
     <dimen name="dimen4">4dp</dimen>
     <dimen name="dimen6">6dp</dimen>
