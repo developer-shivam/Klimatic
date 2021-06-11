@@ -1,6 +1,5 @@
 package app.klimatic.data.model.weather
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Location(

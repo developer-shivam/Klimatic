@@ -23,10 +23,9 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     @LayoutRes
-    abstract fun getLayoutResource() : Int
+    abstract fun getLayoutResource(): Int
 
     abstract fun performDependencyInjection(activityComponent: ActivityComponent)
 
     abstract fun setupView(savedInstanceState: Bundle?)
-
 }

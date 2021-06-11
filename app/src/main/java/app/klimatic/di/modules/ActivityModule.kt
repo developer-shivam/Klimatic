@@ -12,15 +12,15 @@ class ActivityModule {
 
     @ActivityScope
     @Provides
-    fun provideWeatherRepository(repository: CurrentWeatherDataRepositoryImpl)
-            : CurrentWeatherDataRepository {
+    fun provideWeatherRepository(repository: CurrentWeatherDataRepositoryImpl):
+            CurrentWeatherDataRepository {
         return repository
     }
 
     @ActivityScope
     @Provides
-    fun provideWeatherViewModel(repository: CurrentWeatherDataRepository)
-            : CurrentWeatherViewModel {
+    fun provideWeatherViewModel(repository: CurrentWeatherDataRepository):
+            CurrentWeatherViewModel {
         return CurrentWeatherViewModel(repository)
     }
 }

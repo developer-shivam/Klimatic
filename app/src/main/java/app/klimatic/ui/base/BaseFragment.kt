@@ -16,7 +16,9 @@ abstract class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         val activityComponent = DaggerActivityComponent.builder()
-            .applicationComponent((requireActivity().application as KlimaticApplication).getApplicationComponent())
+            .applicationComponent(
+                (requireActivity().application as KlimaticApplication).getApplicationComponent()
+            )
             .build()
 
         performDependencyInjection(activityComponent)
@@ -33,7 +35,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     @LayoutRes
-    abstract fun getLayoutResource() : Int
+    abstract fun getLayoutResource(): Int
 
     abstract fun performDependencyInjection(activityComponent: ActivityComponent)
 

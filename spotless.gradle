@@ -1,0 +1,35 @@
+spotless {
+
+    format 'misc', {
+        // define the files to apply `misc` to
+        target '**/*.gradle', '**/*.md', '**/.gitignore'
+
+        // define the steps to apply to those files
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    kotlin {
+        target '**/*.kt'
+        ktlint().userData(
+                // This will fucking strict you to code before this line ------------------------>
+                ['max_line_length': '100']
+        )
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+}
+
+task createSpotlessPreCommitHook() {
+    def gitHooksDirectory = new File("$project.rootDir/.git/hooks/")
+    if (!gitHooksDirectory.exists()) gitHooksDirectory.mkdirs()
+    new File("$project.rootDir/.git/hooks", "pre-commit").text = """
+    #!/bin/bash
+    echo "Running spotless check"
+    ./gradlew spotlessApply
+    git add .
+"""
+    "chmod +x .git/hooks/pre-commit".execute()
+}
