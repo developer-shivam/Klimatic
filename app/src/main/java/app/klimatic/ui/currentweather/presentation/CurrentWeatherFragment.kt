@@ -18,11 +18,7 @@ class CurrentWeatherFragment : BaseFragment() {
     lateinit var currentWeatherViewModel: CurrentWeatherViewModel
 
     companion object {
-
-        fun create(): CurrentWeatherFragment {
-            // No arguments as of now. So returning instance right away
-            return CurrentWeatherFragment()
-        }
+        fun create() = CurrentWeatherFragment()
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_weather
