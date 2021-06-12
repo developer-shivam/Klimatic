@@ -12,7 +12,7 @@ sealed class ViewState<ResultType> {
         val code: Int? = ERROR_CODE_GENERIC
     ) : ViewState<ResultType>()
 
-    class StartLoading<ResultType> : ViewState<ResultType>()
+    class ShowLoading<ResultType> : ViewState<ResultType>()
 
     class HideLoading<ResultType> : ViewState<ResultType>()
 }

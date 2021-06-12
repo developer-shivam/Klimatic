@@ -6,9 +6,11 @@ import androidx.lifecycle.Observer
 import app.klimatic.R
 import app.klimatic.di.components.ActivityComponent
 import app.klimatic.ui.base.BaseFragment
-import app.klimatic.ui.utils.ViewState
+import app.klimatic.ui.utils.handleState
+import app.klimatic.ui.utils.hide
+import app.klimatic.ui.utils.show
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.fragment_weather.*
+import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 
 class CurrentWeatherFragment : BaseFragment() {
 
@@ -36,19 +38,15 @@ class CurrentWeatherFragment : BaseFragment() {
 
     private fun setupObservers() {
         currentWeatherViewModel.weatherListener.observe(this, Observer { state ->
-            when (state) {
-                is ViewState.Success -> {
-                    state.data?.let {
-                        currentWeather.setCurrentWeatherData(it)
+            handleState(state,
+                { data ->
+                    if (data!!.location != null && data.current != null) {
+                        currentWeather.show()
+                        currentWeather.setCurrentWeatherData(data)
                     }
-                }
-                is ViewState.Error -> {
-                }
-                is ViewState.StartLoading -> {
-                }
-                is ViewState.HideLoading -> {
-                }
-            }
+                }, {
+                    currentWeather.hide()
+                })
         })
     }
 }
