@@ -12,9 +12,10 @@ spotless {
 
     kotlin {
         target '**/*.kt'
+        targetExclude '**/*Test.kt'
         ktlint().userData(
                 // This will fucking strict you to code before this line ------------------------>
-                ['max_line_length': '200']
+                ['max_line_length': '100']
         )
         trimTrailingWhitespace()
         indentWithSpaces()

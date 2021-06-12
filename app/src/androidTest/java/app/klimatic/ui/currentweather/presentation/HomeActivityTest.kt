@@ -63,7 +63,7 @@ class HomeActivityTest {
         // Launch the activity
         scenario = ActivityScenario.launch(HomeActivity::class.java)
 
-        // launch activity creates fragment which fetches joke
+        // launch activity creates fragment which fetches current weather
         scenario.onActivity { activity ->
             assertTrue(activity.supportFragmentManager.fragments[0].isResumed)
             assertTrue(activity.supportFragmentManager.fragments[0].isVisible)
@@ -78,13 +78,13 @@ class HomeActivityTest {
     @Test
     fun giveEmptyJsonResponse_whenFetchWeather_shouldNotShowView() {
 
-        // Set empty response dispatcher
+        // Set empty json response dispatcher
         mockWebServer.dispatcher = EmptyJsonResponseDispatcher()
 
         // Launch the activity
         scenario = ActivityScenario.launch(HomeActivity::class.java)
 
-        // launch activity creates fragment which fetches joke
+        // launch activity creates fragment which fetches current weather
         scenario.onActivity { activity ->
             assertTrue(activity.supportFragmentManager.fragments[0].isResumed)
             assertTrue(activity.supportFragmentManager.fragments[0].isVisible)
