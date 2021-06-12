@@ -48,8 +48,6 @@ class HomeActivityTest {
             assertTrue(activity.supportFragmentManager.fragments[0].isVisible)
         }
 
-        Thread.sleep(500)
-
         onView(withId(R.id.currentWeather))
             .check(matches(isDisplayed()))
 
@@ -71,8 +69,6 @@ class HomeActivityTest {
             assertTrue(activity.supportFragmentManager.fragments[0].isVisible)
         }
 
-        Thread.sleep(500)
-
         onView(withId(R.id.currentWeather))
             .check(matches(not(isDisplayed())))
 
@@ -93,8 +89,6 @@ class HomeActivityTest {
             assertTrue(activity.supportFragmentManager.fragments[0].isResumed)
             assertTrue(activity.supportFragmentManager.fragments[0].isVisible)
         }
-
-        Thread.sleep(500)
 
         onView(withId(R.id.currentWeather))
             .check(matches(not(isDisplayed())))
