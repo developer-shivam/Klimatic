@@ -7,7 +7,6 @@ import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
 import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
 import app.klimatic.ui.utils.ViewState
-import app.klimatic.ui.utils.toDataOrNull
 import kotlinx.coroutines.launch
 
 class CurrentWeatherViewModel(private val repository: CurrentWeatherDataRepository) : ViewModel() {

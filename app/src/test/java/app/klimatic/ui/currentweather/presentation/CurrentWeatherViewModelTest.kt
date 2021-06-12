@@ -97,7 +97,6 @@ class CurrentWeatherViewModelTest {
 
     /************ END ************/
 
-
     private fun verifyWeatherObserver(value: ViewState<CurrentWeatherResponse>) {
         weatherObserver.onChanged(value)
     }
@@ -110,6 +109,4 @@ class CurrentWeatherViewModelTest {
     fun tearDown() {
         viewModel.weatherListener.removeObserver(weatherObserver)
     }
-
-
 }
