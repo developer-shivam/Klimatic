@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class CurrentWeatherViewModel(private val repository: CurrentWeatherDataRepository) : ViewModel() {
 
-    val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse?>>()
+    val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse>>()
 
     /**
      * query possible values
@@ -22,9 +22,9 @@ class CurrentWeatherViewModel(private val repository: CurrentWeatherDataReposito
      * */
     fun fetchCurrentWeather(query: String = "auto:ip") {
         viewModelScope.launch {
-            val viewState: ViewState<CurrentWeatherResponse?> =
+            val viewState: ViewState<CurrentWeatherResponse> =
                 when (val response = repository.fetchCurrentWeather(query)) {
-                    is Response.Success -> ViewState.Success(data = response.toDataOrNull())
+                    is Response.Success -> ViewState.Success(data = response.data)
                     is Response.Error -> ViewState.Error(code = response.errorCode)
                 }
             weatherListener.postValue(viewState)
