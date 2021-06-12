@@ -23,3 +23,29 @@ fun <T> Response<T>.toErrorCode(): Int? {
         else -> null
     }
 }
+
+fun <T> handleState(
+    state: ViewState<T>,
+    success: (data: T) -> Unit,
+    error: (errorCode: Int?) -> Unit
+) {
+    when (state) {
+        is ViewState.Success -> success(state.data)
+        is ViewState.Error -> error(state.code)
+    }
+}
+
+fun <T> handleState(
+    state: ViewState<T>,
+    success: (data: T) -> Unit,
+    error: (errorCode: Int?) -> Unit,
+    showLoading: () -> Unit,
+    hideLoading: () -> Unit
+) {
+    when (state) {
+        is ViewState.Success -> success(state.data)
+        is ViewState.Error -> error(state.code)
+        is ViewState.ShowLoading -> showLoading()
+        is ViewState.HideLoading -> hideLoading()
+    }
+}

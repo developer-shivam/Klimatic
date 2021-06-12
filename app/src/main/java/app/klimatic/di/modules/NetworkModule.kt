@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class NetworkModule {
+open class NetworkModule {
 
     @ApplicationScope
     @Provides
@@ -25,7 +25,7 @@ class NetworkModule {
 
     @ApplicationScope
     @Provides
-    fun provideBaseUrl(): String = BuildConfig.BASE_URL
+    open fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
     @ApplicationScope
     @Provides

@@ -4,17 +4,17 @@ import android.app.Application
 import app.klimatic.di.components.ApplicationComponent
 import app.klimatic.di.components.DaggerApplicationComponent
 
-class KlimaticApplication : Application() {
+open class KlimaticApplication : Application() {
 
-    private var applicationComponent: ApplicationComponent? = null
+    var _applicationComponent: ApplicationComponent? = null
 
     override fun onCreate() {
         super.onCreate()
 
-        applicationComponent = DaggerApplicationComponent.create()
+        _applicationComponent = DaggerApplicationComponent.create()
     }
 
-    fun getApplicationComponent(): ApplicationComponent? {
-        return applicationComponent
+    open fun getApplicationComponent(): ApplicationComponent? {
+        return _applicationComponent
     }
 }
