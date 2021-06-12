@@ -62,7 +62,7 @@ dependencies {
     def materialLibraryVersion = "1.3.0"
     implementation "com.google.android.material:material:$materialLibraryVersion"
 
-    //Lifecycle
+    /* Lifecycle */
     def lifeCycleVersion = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifeCycleVersion"
     def viewModelVersion = "2.3.1"
@@ -70,7 +70,7 @@ dependencies {
     def liveDataKtxVersion = "2.4.0-alpha01"
     implementation  "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
 
-    //multidex
+    /* Multidex */
     implementation 'com.android.support:multidex:1.0.3'
 
     /* Image Loading */
