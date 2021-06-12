@@ -14,7 +14,7 @@ spotless {
         target '**/*.kt'
         ktlint().userData(
                 // This will fucking strict you to code before this line ------------------------>
-                ['max_line_length': '100']
+                ['max_line_length': '200']
         )
         trimTrailingWhitespace()
         indentWithSpaces()

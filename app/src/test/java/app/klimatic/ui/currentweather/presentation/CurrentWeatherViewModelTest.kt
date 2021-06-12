@@ -35,7 +35,7 @@ class SingleNetworkCallViewModelTest {
     private lateinit var currentWeatherDataRepository: CurrentWeatherDataRepository
 
     @Mock
-    private lateinit var weatherObserver: Observer<ViewState<CurrentWeatherResponse?>>
+    private lateinit var weatherObserver: Observer<ViewState<CurrentWeatherResponse>>
 
     @Mock
     private lateinit var currentWeatherResponse: CurrentWeatherResponse

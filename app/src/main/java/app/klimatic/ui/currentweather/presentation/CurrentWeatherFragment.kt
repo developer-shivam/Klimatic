@@ -36,7 +36,7 @@ class CurrentWeatherFragment : BaseFragment() {
         currentWeatherViewModel.weatherListener.observe(this, Observer { state ->
             handleState(state,
                 { data ->
-                    if (data!!.location != null && data.current != null) {
+                    if (data.location != null && data.current != null) {
                         currentWeather.show()
                         currentWeather.setCurrentWeatherData(data)
                     }
