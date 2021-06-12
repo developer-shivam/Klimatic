@@ -7,6 +7,7 @@ import app.klimatic.data.response.Response
 import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
+import app.klimatic.utils.TestFactory.MOCKED_ERROR_CODE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Before
@@ -39,14 +40,13 @@ class SingleNetworkCallViewModelTest {
     @Mock
     private lateinit var currentWeatherResponse: CurrentWeatherResponse
 
-    var mockedErrorCode: Int = 0
-
     private lateinit var viewModel: CurrentWeatherViewModel
 
     @Before
     fun setup() {
-        viewModel = CurrentWeatherViewModel(currentWeatherDataRepository)
-        viewModel.weatherListener.observeForever(weatherObserver)
+        viewModel = CurrentWeatherViewModel(currentWeatherDataRepository).apply {
+            weatherListener.observeForever(weatherObserver)
+        }
     }
 
     @Test
@@ -59,7 +59,6 @@ class SingleNetworkCallViewModelTest {
 
             viewModel.fetchCurrentWeather(anyString())
 
-            verify(currentWeatherDataRepository).fetchCurrentWeather(anyString())
             verify(weatherObserver).onChanged(ViewState.Success(currentWeatherResponse))
         }
     }
@@ -68,14 +67,13 @@ class SingleNetworkCallViewModelTest {
     fun givenErrorResponse_whenFetchCurrentWeather_shouldReturnError() {
         testCoroutineRule.runBlockingTest {
 
-            doReturn(Response.Error<CurrentWeatherResponse>(mockedErrorCode))
+            doReturn(Response.Error<CurrentWeatherResponse>(MOCKED_ERROR_CODE))
                 .`when`(currentWeatherDataRepository)
                 .fetchCurrentWeather(anyString())
 
             viewModel.fetchCurrentWeather(anyString())
 
-            verify(currentWeatherDataRepository).fetchCurrentWeather(anyString())
-            verify(weatherObserver).onChanged(ViewState.Error(mockedErrorCode))
+            verify(weatherObserver).onChanged(ViewState.Error(MOCKED_ERROR_CODE))
         }
     }
 
