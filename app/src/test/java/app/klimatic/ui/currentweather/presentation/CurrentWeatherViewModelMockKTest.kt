@@ -1,17 +1,13 @@
 package app.klimatic.ui.currentweather.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
-import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
-import app.klimatic.utils.TestFactory
+import app.klimatic.utils.factory.TestFactory
+import app.klimatic.utils.robots.CurrentWeatherViewModelMockKTestRobot
 import com.google.common.truth.Truth.assertThat
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.slot
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,26 +25,24 @@ class CurrentWeatherViewModelMockKTest {
     @get:Rule
     val instantTaskExecutor = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: CurrentWeatherViewModel
-
-    @RelaxedMockK
-    lateinit var repository: CurrentWeatherDataRepository
-
-    @RelaxedMockK
-    lateinit var weatherObserver: Observer<ViewState<CurrentWeatherResponse>>
+    lateinit var robot: CurrentWeatherViewModelMockKTestRobot
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this)
-        viewModel = CurrentWeatherViewModel(repository = repository).apply {
-            weatherListener.observeForever(weatherObserver)
+        robot = CurrentWeatherViewModelMockKTestRobot().apply {
+            setUp()
         }
+    }
+
+    @After
+    fun tearDown() {
+        robot.tearDown()
     }
 
     /************ Tests for fetch current weather ************/
     /************ Start ************/
     @Test
-    fun `GIVEN query WHEN fetch current weather api RETURNS current weather response WHILE fetching current weather THEN post success`() {
+    fun `GIVEN query WHEN fetch current weather api RETURNS current weather response WHILE fetching current weather THEN post success`()= robot.run {
         val weatherSlot = slot<ViewState.Success<CurrentWeatherResponse>>()
         val query = "xx"
         val expectValue = TestFactory.currentWeatherResponse
@@ -63,7 +57,7 @@ class CurrentWeatherViewModelMockKTest {
     }
 
     @Test
-    fun `WHEN fetch current weather api RETURNS current weather response WHILE fetching current weather THEN post success`() {
+    fun `WHEN fetch current weather api RETURNS current weather response WHILE fetching current weather THEN post success`() = robot.run {
         val weatherSlot = slot<ViewState.Success<CurrentWeatherResponse>>()
         val expectValue = TestFactory.currentWeatherResponse
         coEveryFetchCurrentWeatherApiReturns(value = Response.Success(data = expectValue))
@@ -77,7 +71,7 @@ class CurrentWeatherViewModelMockKTest {
     }
 
     @Test
-    fun `GIVEN query WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() {
+    fun `GIVEN query WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() = robot.run {
         val query = "xx"
         coEveryFetchCurrentWeatherApiReturns(value = Response.Error(TestFactory.ERROR_CODE_GENERIC))
         viewModel.fetchCurrentWeather(query = query)
@@ -87,7 +81,7 @@ class CurrentWeatherViewModelMockKTest {
     }
 
     @Test
-    fun `WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() {
+    fun `WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() = robot.run {
         coEveryFetchCurrentWeatherApiReturns(value = Response.Error(TestFactory.ERROR_CODE_GENERIC))
         viewModel.fetchCurrentWeather()
         verify {
@@ -97,16 +91,4 @@ class CurrentWeatherViewModelMockKTest {
 
     /************ END ************/
 
-    private fun verifyWeatherObserver(value: ViewState<CurrentWeatherResponse>) {
-        weatherObserver.onChanged(value)
-    }
-
-    private fun coEveryFetchCurrentWeatherApiReturns(value: Response<CurrentWeatherResponse>) {
-        coEvery { repository.fetchCurrentWeather(any()) } returns value
-    }
-
-    @After
-    fun tearDown() {
-        viewModel.weatherListener.removeObserver(weatherObserver)
-    }
 }
