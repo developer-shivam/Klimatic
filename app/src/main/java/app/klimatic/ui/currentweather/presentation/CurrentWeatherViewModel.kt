@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
-import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
+import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
 import app.klimatic.ui.utils.ViewState
 import kotlinx.coroutines.launch
 
-class CurrentWeatherViewModel(private val repository: CurrentWeatherDataRepository) : ViewModel() {
+class CurrentWeatherViewModel(private val useCase: CurrentWeatherUseCase) : ViewModel() {
 
     val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse>>()
 
@@ -22,7 +22,7 @@ class CurrentWeatherViewModel(private val repository: CurrentWeatherDataReposito
     fun fetchCurrentWeather(query: String = "auto:ip") {
         viewModelScope.launch {
             val viewState: ViewState<CurrentWeatherResponse> =
-                when (val response = repository.fetchCurrentWeather(query)) {
+                when (val response = useCase.fetchCurrentWeather(query)) {
                     is Response.Success -> ViewState.Success(data = response.data)
                     is Response.Error -> ViewState.Error(code = response.errorCode)
                 }
