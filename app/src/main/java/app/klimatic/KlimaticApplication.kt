@@ -3,6 +3,8 @@ package app.klimatic
 import android.app.Application
 import app.klimatic.di.components.ApplicationComponent
 import app.klimatic.di.components.DaggerApplicationComponent
+import app.klimatic.di.modules.DatabaseModule
+import app.klimatic.di.modules.NetworkModule
 
 open class KlimaticApplication : Application() {
 
@@ -11,7 +13,10 @@ open class KlimaticApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        _applicationComponent = DaggerApplicationComponent.create()
+        _applicationComponent = DaggerApplicationComponent.builder()
+            .networkModule(NetworkModule())
+            .databaseModule(DatabaseModule(applicationContext))
+            .build()
     }
 
     open fun getApplicationComponent(): ApplicationComponent? {

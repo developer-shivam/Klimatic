@@ -95,6 +95,11 @@ dependencies {
     def loggingInterceptorVersion = "4.9.1"
     implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 
+    /* Room */
+    def roomVersion = "2.3.0"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
     /* Unit Testing */
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.mockito:mockito-core:3.3.3"
