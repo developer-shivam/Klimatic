@@ -1,0 +1,49 @@
+package app.klimatic.ui.currentweather.presentation
+
+import android.content.Context
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import androidx.constraintlayout.widget.ConstraintLayout
+import app.klimatic.R
+import app.klimatic.data.remote.weather.CurrentWeatherResponse
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvCurrentTemp
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvCurrentWeatherCondition
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvHumidityValue
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvLocation
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvLocationRegionCountry
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvWindDirectionValue
+import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvWindSpeedValue
+
+class CurrentWeatherDetailView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+    private var view = LayoutInflater.from(context)
+        .inflate(R.layout.layout_current_weather_detail, this, true)
+
+    fun setCurrentWeatherData(currentWeatherResponse: CurrentWeatherResponse?) {
+
+        view.run {
+            val location = currentWeatherResponse?.location
+            tvLocation.text = location?.name
+            tvLocationRegionCountry.text =
+                context.getString(R.string.two_place_text, location?.region, location?.country)
+
+            val current = currentWeatherResponse?.current
+            val condition = current?.condition
+
+            tvCurrentWeatherCondition.text = condition?.text
+            tvCurrentTemp.text = context.getString(R.string.temp_c, current?.tempC)
+            tvWindSpeedValue.text = context.getString(R.string.wind_kph, current?.windKph)
+
+            tvWindDirectionValue.text =
+                context.getString(
+                    R.string.wind_direction_value, current?.windDegree.toString(),
+                    current?.windDir
+                )
+            tvHumidityValue.text = current?.humidity.toString()
+        }
+    }
+}

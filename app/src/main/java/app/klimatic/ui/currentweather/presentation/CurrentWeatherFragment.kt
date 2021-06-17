@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import app.klimatic.R
+import app.klimatic.data.model.weather.Current.Companion.DAY
 import app.klimatic.di.components.ActivityComponent
 import app.klimatic.ui.base.BaseFragment
 import app.klimatic.ui.utils.handleState
@@ -11,6 +12,7 @@ import app.klimatic.ui.utils.hide
 import app.klimatic.ui.utils.show
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
+import kotlinx.android.synthetic.main.fragment_weather.currentWeatherCondition
 
 class CurrentWeatherFragment : BaseFragment() {
 
@@ -39,9 +41,18 @@ class CurrentWeatherFragment : BaseFragment() {
                     if (data.location != null && data.current != null) {
                         currentWeather.show()
                         currentWeather.setCurrentWeatherData(data)
+
+                        if (data.current.condition != null) {
+                            currentWeatherCondition.show()
+                            currentWeatherCondition.setCurrentWeatherCondition(
+                                data.current.isDay == DAY,
+                                data.current.condition
+                            )
+                        }
                     }
                 }, {
                     currentWeather.hide()
+                    currentWeatherCondition.hide()
                 })
         })
     }

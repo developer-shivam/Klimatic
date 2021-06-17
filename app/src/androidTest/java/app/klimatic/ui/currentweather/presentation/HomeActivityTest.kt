@@ -42,7 +42,7 @@ class HomeActivityTest {
         // Launch the activity
         scenario = ActivityScenario.launch(HomeActivity::class.java)
 
-        // launch activity creates fragment which fetches joke
+        // launch activity creates fragment which fetches current weather
         scenario.onActivity { activity ->
             assertTrue(activity.supportFragmentManager.fragments[0].isResumed)
             assertTrue(activity.supportFragmentManager.fragments[0].isVisible)

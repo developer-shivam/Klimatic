@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@id/partly_cloudy_day_scene"
+        motion:constraintSetStart="@id/base" />
+
+    <!-- Base scene where all view will be not be visible -->
+    <ConstraintSet android:id="@+id/base">
+        <Constraint
+            android:id="@id/sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/sun" />
+        <Constraint
+            android:id="@id/moon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/moon" />
+        <Constraint
+            android:id="@id/cloud1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/cloud" />
+        <Constraint
+            android:id="@id/cloud2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/cloud" />
+        <Constraint
+            android:id="@id/mist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/mist" />
+        <Constraint
+            android:id="@id/raidDrop1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/rain_drop" />
+        <Constraint
+            android:id="@id/raidDrop2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/rain_drop" />
+        <Constraint
+            android:id="@id/snow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/snow" />
+        <Constraint
+            android:id="@id/snow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/snow" />
+    </ConstraintSet>
+
+    <!-- Weather condition scene start -->
+    <ConstraintSet
+        android:id="@+id/sunny_scene"
+        motion:deriveConstraintsFrom="@id/base">
+        <Constraint
+            android:id="@id/sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:scaleY="2"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/sun" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/clear_scene"
+        motion:deriveConstraintsFrom="@id/base">
+        <Constraint
+            android:id="@id/moon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:scaleY="2"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/moon" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/partly_cloudy_scene"
+        motion:deriveConstraintsFrom="@id/base">
+        <Constraint
+            android:id="@id/cloud1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2.5"
+            android:scaleY="2.5"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/cloud" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/partly_cloudy_day_scene"
+        motion:deriveConstraintsFrom="@id/partly_cloudy_scene">
+        <Constraint
+            android:id="@id/sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.75"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.40"
+            motion:srcCompat="@drawable/sun" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/partly_cloudy_night_scene"
+        motion:deriveConstraintsFrom="@id/partly_cloudy_scene">
+        <Constraint
+            android:id="@id/moon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:scaleY="2"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.75"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.50"
+            motion:srcCompat="@drawable/moon" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/cloudy_scene"
+        motion:deriveConstraintsFrom="@id/base">
+        <Constraint
+            android:id="@id/cloud1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2.5"
+            android:scaleY="2.5"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/cloud" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/overcast_scene"
+        motion:deriveConstraintsFrom="@id/base">
+        <Constraint
+            android:id="@id/cloud2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:scaleY="2"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.75"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.40"
+            motion:srcCompat="@drawable/cloud" />
+        <Constraint
+            android:id="@id/cloud1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2.5"
+            android:scaleY="2.5"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/cloud" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/mist_scene"
+        motion:deriveConstraintsFrom="@id/base">
+        <Constraint
+            android:id="@id/mist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:scaleY="2"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:srcCompat="@drawable/mist" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/patchy_rain_scene"
+        motion:deriveConstraintsFrom="@id/overcast_scene">
+        <Constraint
+            android:id="@id/raidDrop1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:scaleY="2"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias=".35"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias=".80"
+            motion:srcCompat="@drawable/rain_drop" />
+        <Constraint
+            android:id="@id/raidDrop2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2.5"
+            android:scaleY="2.5"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias=".55"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias=".85"
+            motion:srcCompat="@drawable/rain_drop" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/patchy_snow_scene"
+        motion:deriveConstraintsFrom="@id/overcast_scene">
+        <Constraint
+            android:id="@id/snow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias=".35"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias=".88"
+            motion:srcCompat="@drawable/snow" />
+        <Constraint
+            android:id="@id/snow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias=".60"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias=".85"
+            motion:srcCompat="@drawable/snow" />
+    </ConstraintSet>
+    <!-- Weather condition scene end -->
+
+</MotionScene>

@@ -5,37 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/ivCurrentWeatherCondition"
-        android:layout_width="@dimen/dimen200"
-        android:layout_height="@dimen/dimen200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-
     <TextView
         android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen56"
+        android:textColor="@color/white"
         android:textSize="@dimen/text24"
+        app:layout_constraintVertical_bias="0"
+        android:textAlignment="viewEnd"
         app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemp"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="New Delhi" />
+
+    <TextView
+        android:id="@+id/tvLocationRegionCountry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text18"
+        android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemp"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLocation"
+        tools:text="New Delhi United States of America" />
 
     <TextView
         android:id="@+id/tvCurrentTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen24"
+        android:textColor="@color/white"
         android:textSize="@dimen/text48"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvCurrentWeatherCondition"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
-        app:layout_constraintTop_toBottomOf="@id/tvLocation"
-        tools:text="24 °C" />
+        app:layout_constraintTop_toBottomOf="@id/tvLocationRegionCountry"
+        tools:text="26 °C" />
 
     <TextView
         android:id="@+id/tvCurrentWeatherCondition"
@@ -43,10 +52,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textAlignment="viewEnd"
+        android:textColor="@color/white"
         android:textSize="@dimen/text16"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvCurrentTemp"
-        tools:text="Moderate or heavy rain with thunder" />
+        tools:text="Sunny" />
 
     <TextView
         android:id="@+id/tvWindSpeed"
@@ -54,7 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen24"
         android:text="@string/wind_speed"
+        android:textColor="@color/white"
         android:textSize="@dimen/text12"
+        android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvCurrentWeatherCondition" />
 
@@ -62,6 +74,7 @@
         android:id="@+id/tvWindSpeedValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:textSize="@dimen/text18"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
@@ -74,7 +87,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen24"
         android:text="@string/wind_direction"
+        android:textColor="@color/white"
         android:textSize="@dimen/text12"
+        android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvWindSpeedValue" />
 
@@ -82,6 +97,7 @@
         android:id="@+id/tvWindDirectionValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:textSize="@dimen/text18"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
@@ -94,7 +110,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen24"
         android:text="@string/humidity"
+        android:textColor="@color/white"
         android:textSize="@dimen/text12"
+        android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
         app:layout_constraintTop_toBottomOf="@+id/tvWindDirectionValue" />
 
@@ -102,6 +120,7 @@
         android:id="@+id/tvHumidityValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:textSize="@dimen/text18"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
