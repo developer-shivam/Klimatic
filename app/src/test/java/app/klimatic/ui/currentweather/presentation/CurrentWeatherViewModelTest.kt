@@ -7,6 +7,7 @@ import app.klimatic.data.response.Response
 import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
+import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
 import app.klimatic.utils.factory.TestFactory.MOCKED_ERROR_CODE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
@@ -17,9 +18,9 @@ import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.anyString
-import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.Mockito.`when` as whenever
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -53,12 +54,14 @@ class CurrentWeatherViewModelTest {
     fun givenSuccessResponse_whenFetchCurrentWeather_shouldReturnSuccess() {
         testCoroutineRule.runBlockingTest {
 
-            doReturn(Response.Success(currentWeatherResponse))
-                .`when`(useCase)
-                .fetchCurrentWeather(anyString())
+            // Given
+            whenever(useCase.fetchCurrentWeather(EMPTY_QUERY))
+                .thenReturn(Response.Success(currentWeatherResponse))
 
+            // When
             viewModel.fetchCurrentWeather(anyString())
 
+            // Then
             verify(weatherObserver).onChanged(ViewState.Success(currentWeatherResponse))
         }
     }
@@ -67,12 +70,14 @@ class CurrentWeatherViewModelTest {
     fun givenErrorResponse_whenFetchCurrentWeather_shouldReturnError() {
         testCoroutineRule.runBlockingTest {
 
-            doReturn(Response.Error<CurrentWeatherResponse>(MOCKED_ERROR_CODE))
-                .`when`(useCase)
-                .fetchCurrentWeather(anyString())
+            // Given
+            whenever(useCase.fetchCurrentWeather(EMPTY_QUERY))
+                .thenReturn(Response.Error(MOCKED_ERROR_CODE))
 
+            // When
             viewModel.fetchCurrentWeather(anyString())
 
+            // Then
             verify(weatherObserver).onChanged(ViewState.Error(MOCKED_ERROR_CODE))
         }
     }
