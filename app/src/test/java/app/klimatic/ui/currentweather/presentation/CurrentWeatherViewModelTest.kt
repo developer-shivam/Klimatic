@@ -10,6 +10,8 @@ import app.klimatic.utils.TestCoroutineRule
 import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
 import app.klimatic.utils.factory.TestFactory.MOCKED_ERROR_CODE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -41,12 +43,16 @@ class CurrentWeatherViewModelTest {
     @Mock
     private lateinit var currentWeatherResponse: CurrentWeatherResponse
 
+    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val testCoroutineScope = TestCoroutineScope(testCoroutineDispatcher)
+
     private lateinit var viewModel: CurrentWeatherViewModel
 
     @Before
     fun setup() {
         viewModel = CurrentWeatherViewModel(useCase).apply {
             weatherListener.observeForever(weatherObserver)
+            ioScope = testCoroutineScope
         }
     }
 
@@ -59,7 +65,7 @@ class CurrentWeatherViewModelTest {
                 .thenReturn(Response.Success(currentWeatherResponse))
 
             // When
-            viewModel.fetchCurrentWeather(anyString())
+            viewModel.fetchCurrentWeather(EMPTY_QUERY)
 
             // Then
             verify(weatherObserver).onChanged(ViewState.Success(currentWeatherResponse))
@@ -75,7 +81,7 @@ class CurrentWeatherViewModelTest {
                 .thenReturn(Response.Error(MOCKED_ERROR_CODE))
 
             // When
-            viewModel.fetchCurrentWeather(anyString())
+            viewModel.fetchCurrentWeather(EMPTY_QUERY)
 
             // Then
             verify(weatherObserver).onChanged(ViewState.Error(MOCKED_ERROR_CODE))
