@@ -49,4 +49,10 @@ data class Current(
     val windKph: Double?,
     @SerializedName("wind_mph")
     val windMph: Double?
-)
+) {
+
+    companion object {
+        const val DAY = 1
+        const val NIGHT = 0
+    }
+}

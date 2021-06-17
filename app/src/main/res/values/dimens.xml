@@ -24,6 +24,9 @@
     <dimen name="dimen20">20dp</dimen>
     <dimen name="dimen22">22dp</dimen>
     <dimen name="dimen24">24dp</dimen>
+    <dimen name="dimen28">28dp</dimen>
+    <dimen name="dimen32">32dp</dimen>
+    <dimen name="dimen36">36dp</dimen>
     <dimen name="dimen48">48dp</dimen>
     <dimen name="dimen56">56dp</dimen>
     <dimen name="dimen200">200dp</dimen>

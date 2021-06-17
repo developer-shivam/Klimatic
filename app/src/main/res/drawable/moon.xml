@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="47dp"
+    android:height="64dp"
+    android:viewportWidth="47"
+    android:viewportHeight="64">
+    <group>
+        <clip-path android:pathData="M0.2186,0.0431h46v63h-46z" />
+        <path
+            android:fillColor="#ffffff"
+            android:fillType="evenOdd"
+            android:pathData="M0.3875,59.9643C11.0769,54.9128 18.4671,44.074 18.4671,31.5182C18.4671,18.9623 11.0769,8.1236 0.3875,3.072C4.4973,1.1298 9.0947,0.0431 13.9472,0.0431C31.4212,0.0431 45.5866,14.135 45.5866,31.5182C45.5866,48.9014 31.4212,62.9933 13.9472,62.9933C9.0947,62.9933 4.4973,61.9065 0.3875,59.9643Z" />
+        <path
+            android:fillAlpha="0.3"
+            android:fillType="evenOdd"
+            android:pathData="M0.3875,59.9643C11.0769,54.9128 18.4671,44.074 18.4671,31.5182C18.4671,18.9623 11.0769,8.1236 0.3875,3.072C4.4973,1.1298 9.0947,0.0431 13.9472,0.0431C31.4212,0.0431 45.5866,14.135 45.5866,31.5182C45.5866,48.9014 31.4212,62.9933 13.9472,62.9933C9.0947,62.9933 4.4973,61.9065 0.3875,59.9643Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:endX="0.387512"
+                    android:endY="62.9933"
+                    android:startX="0.387512"
+                    android:startY="0.0430908"
+                    android:type="linear">
+                    <item
+                        android:color="#7FFFFFFF"
+                        android:offset="0" />
+                    <item
+                        android:color="#7F000000"
+                        android:offset="1" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path
+            android:fillAlpha="0.5"
+            android:fillColor="#3F8AE9"
+            android:fillType="evenOdd"
+            android:pathData="M0.3875,59.9643C11.0769,54.9128 18.4671,44.074 18.4671,31.5182C18.4671,18.9623 11.0769,8.1236 0.3875,3.072C4.4973,1.1298 9.0947,0.0431 13.9472,0.0431C31.4212,0.0431 45.5866,14.135 45.5866,31.5182C45.5866,48.9014 31.4212,62.9933 13.9472,62.9933C9.0947,62.9933 4.4973,61.9065 0.3875,59.9643Z" />
+    </group>
+</vector>
