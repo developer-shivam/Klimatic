@@ -3,7 +3,7 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@id/partly_cloudy_day_scene"
+        motion:constraintSetEnd="@id/base"
         motion:constraintSetStart="@id/base" />
 
     <!-- Base scene where all view will be not be visible -->
