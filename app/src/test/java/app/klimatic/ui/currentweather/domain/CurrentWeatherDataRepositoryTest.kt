@@ -5,8 +5,6 @@ import app.klimatic.data.remote.weather.CurrentWeatherService
 import app.klimatic.data.response.Response
 import app.klimatic.ui.utils.ErrorUtils
 import app.klimatic.utils.MockWebServerBaseTest
-import app.klimatic.utils.TestCoroutineRule
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -16,8 +14,6 @@ import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.ArgumentMatchers.anyString
-import org.mockito.junit.MockitoJUnitRunner
 import java.net.HttpURLConnection.HTTP_OK
 
 @RunWith(JUnit4::class)
@@ -40,11 +36,15 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
     @Test
     fun givenSuccessResponse_whenFetchCurrentWeather_shouldReturnSuccess() {
         runBlocking {
+
+            // Given
             mockHttpResponseWithUri("json/success_response.json", HTTP_OK)
 
+            // When
             val actual =
-                currentWeatherDataRepository.fetchCurrentWeather(anyString())
+                currentWeatherDataRepository.fetchCurrentWeather("")
 
+            // Then
             assertTrue(actual is Response.Success)
             actual as Response.Success
             assertEquals(actual.data.location?.country, "India")
@@ -55,11 +55,15 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
     @Test
     fun givenNoResponse_whenFetchCurrentWeather_shouldReturnError() {
         runBlocking {
-        mockHttpResponse("", HTTP_OK)
 
+            // Given
+            mockHttpResponse("", HTTP_OK)
+
+            // When
             val actual =
-                currentWeatherDataRepository.fetchCurrentWeather(anyString())
+                currentWeatherDataRepository.fetchCurrentWeather("")
 
+            // Then
             assertTrue(actual is Response.Error)
             actual as Response.Error
             assertEquals(actual.errorCode, ErrorUtils.ERROR_CODE_GENERIC)
