@@ -1,4 +1,4 @@
-package app.klimatic.utils
+package app.klimatic.utils.factory
 
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 

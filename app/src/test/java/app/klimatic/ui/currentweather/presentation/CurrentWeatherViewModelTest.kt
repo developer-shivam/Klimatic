@@ -4,10 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
-import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
+import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
-import app.klimatic.utils.TestFactory.MOCKED_ERROR_CODE
+import app.klimatic.utils.factory.TestFactory.MOCKED_ERROR_CODE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
 import org.junit.Before
@@ -32,7 +32,7 @@ class CurrentWeatherViewModelTest {
     val testCoroutineRule = TestCoroutineRule()
 
     @Mock
-    private lateinit var currentWeatherDataRepository: CurrentWeatherDataRepository
+    private lateinit var useCase: CurrentWeatherUseCase
 
     @Mock
     private lateinit var weatherObserver: Observer<ViewState<CurrentWeatherResponse>>
@@ -44,7 +44,7 @@ class CurrentWeatherViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = CurrentWeatherViewModel(currentWeatherDataRepository).apply {
+        viewModel = CurrentWeatherViewModel(useCase).apply {
             weatherListener.observeForever(weatherObserver)
         }
     }
@@ -54,7 +54,7 @@ class CurrentWeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             doReturn(Response.Success(currentWeatherResponse))
-                .`when`(currentWeatherDataRepository)
+                .`when`(useCase)
                 .fetchCurrentWeather(anyString())
 
             viewModel.fetchCurrentWeather(anyString())
@@ -68,7 +68,7 @@ class CurrentWeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             doReturn(Response.Error<CurrentWeatherResponse>(MOCKED_ERROR_CODE))
-                .`when`(currentWeatherDataRepository)
+                .`when`(useCase)
                 .fetchCurrentWeather(anyString())
 
             viewModel.fetchCurrentWeather(anyString())
