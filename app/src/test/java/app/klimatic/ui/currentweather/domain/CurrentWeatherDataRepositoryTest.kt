@@ -5,6 +5,8 @@ import app.klimatic.data.remote.weather.CurrentWeatherService
 import app.klimatic.data.response.Response
 import app.klimatic.ui.utils.ErrorUtils
 import app.klimatic.utils.MockWebServerBaseTest
+import app.klimatic.utils.factory.TestFactory
+import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -42,7 +44,7 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
 
             // When
             val actual =
-                currentWeatherDataRepository.fetchCurrentWeather("")
+                currentWeatherDataRepository.fetchCurrentWeather(EMPTY_QUERY)
 
             // Then
             assertTrue(actual is Response.Success)
@@ -61,7 +63,7 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
 
             // When
             val actual =
-                currentWeatherDataRepository.fetchCurrentWeather("")
+                currentWeatherDataRepository.fetchCurrentWeather(EMPTY_QUERY)
 
             // Then
             assertTrue(actual is Response.Error)

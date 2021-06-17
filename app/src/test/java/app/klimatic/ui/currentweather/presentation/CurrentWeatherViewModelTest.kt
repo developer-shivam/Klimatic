@@ -7,6 +7,7 @@ import app.klimatic.data.response.Response
 import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
+import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
 import app.klimatic.utils.factory.TestFactory.MOCKED_ERROR_CODE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
@@ -54,7 +55,7 @@ class CurrentWeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             // Given
-            whenever(useCase.fetchCurrentWeather(""))
+            whenever(useCase.fetchCurrentWeather(EMPTY_QUERY))
                 .thenReturn(Response.Success(currentWeatherResponse))
 
             // When
@@ -70,7 +71,7 @@ class CurrentWeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             // Given
-            whenever(useCase.fetchCurrentWeather(""))
+            whenever(useCase.fetchCurrentWeather(EMPTY_QUERY))
                 .thenReturn(Response.Error(MOCKED_ERROR_CODE))
 
             // When
