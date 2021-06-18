@@ -5,29 +5,23 @@ import android.view.View
 import androidx.lifecycle.Observer
 import app.klimatic.R
 import app.klimatic.data.model.weather.Current.Companion.DAY
-import app.klimatic.di.components.ActivityComponent
 import app.klimatic.ui.base.BaseFragment
 import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hide
 import app.klimatic.ui.utils.show
-import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherCondition
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CurrentWeatherFragment : BaseFragment() {
 
-    @Inject
-    lateinit var currentWeatherViewModel: CurrentWeatherViewModel
+    private val currentWeatherViewModel by viewModel<CurrentWeatherViewModel>()
 
     companion object {
         fun create() = CurrentWeatherFragment()
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_weather
-
-    override fun performDependencyInjection(activityComponent: ActivityComponent) {
-        activityComponent.inject(this)
-    }
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
