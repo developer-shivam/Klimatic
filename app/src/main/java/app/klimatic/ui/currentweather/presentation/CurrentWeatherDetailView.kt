@@ -1,11 +1,13 @@
 package app.klimatic.ui.currentweather.presentation
 
 import android.content.Context
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import app.klimatic.R
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
+import app.klimatic.ui.utils.hide
 import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvCurrentTemp
 import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvCurrentWeatherCondition
 import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvHumidityValue
@@ -28,8 +30,17 @@ class CurrentWeatherDetailView @JvmOverloads constructor(
         view.run {
             val location = currentWeatherResponse?.location
             tvLocation.text = location?.name
-            tvLocationRegionCountry.text =
-                context.getString(R.string.two_place_text, location?.region, location?.country)
+
+            if (!TextUtils.isEmpty(location?.region) && !TextUtils.isEmpty(location?.country)) {
+                tvLocationRegionCountry.text =
+                    context.getString(R.string.two_place_text, location?.region, location?.country)
+            } else if (!TextUtils.isEmpty(location?.region)) {
+                tvLocationRegionCountry.text = location?.region
+            } else if (!TextUtils.isEmpty(location?.country)) {
+                tvLocationRegionCountry.text = location?.country
+            } else {
+                tvLocationRegionCountry.hide()
+            }
 
             val current = currentWeatherResponse?.current
             val condition = current?.condition

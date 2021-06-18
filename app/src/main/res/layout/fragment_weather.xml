@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <app.klimatic.ui.currentweather.presentation.WaveView
+        android:id="@+id/waveView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <app.klimatic.ui.currentweather.presentation.CurrentWeatherConditionLottieView
         android:id="@+id/currentWeatherConditionLottieView"
         app:layout_constraintStart_toStartOf="parent"

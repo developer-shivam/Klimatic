@@ -13,6 +13,7 @@ import app.klimatic.ui.utils.show
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
+import kotlinx.android.synthetic.main.fragment_weather.waveView
 
 class CurrentWeatherFragment : BaseFragment() {
 
@@ -31,7 +32,8 @@ class CurrentWeatherFragment : BaseFragment() {
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
-        currentWeatherViewModel.fetchCurrentWeather("Delhi")
+        currentWeatherViewModel.fetchCurrentWeather()
+        waveView.setLifecycle(lifecycle)
     }
 
     private fun setupObservers() {
