@@ -10,6 +10,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 const val API_KEY = "API_KEY"
 const val BASE_URL = "BASE_URL"
@@ -33,6 +34,8 @@ val networkModule = module {
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(authenticationInterceptor)
             .addNetworkInterceptor(loggingInterceptor)
             .build()
