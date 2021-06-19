@@ -2,9 +2,8 @@ package app.klimatic.ui.currentweather.domain
 
 import app.klimatic.data.remote.weather.CurrentWeatherService
 import app.klimatic.ui.utils.getResponse
-import javax.inject.Inject
 
-class CurrentWeatherDataRepositoryImpl @Inject constructor(
+class CurrentWeatherDataRepositoryImpl(
     private val weatherService: CurrentWeatherService
 ) : CurrentWeatherDataRepository {
 

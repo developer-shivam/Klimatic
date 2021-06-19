@@ -1,74 +1,43 @@
 package app.klimatic.di.modules
 
 import app.klimatic.BuildConfig
+import app.klimatic.data.remote.interceptors.AuthenticationInterceptor
 import app.klimatic.data.remote.weather.CurrentWeatherService
-import app.klimatic.di.qualifiers.ApiKey
-import app.klimatic.di.scopes.ApplicationScope
-import dagger.Module
-import dagger.Provides
-import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-@Module
-open class NetworkModule {
+const val API_KEY = "API_KEY"
+const val BASE_URL = "BASE_URL"
+const val AUTHENTICATION_INTERCEPTOR = "AUTHENTICATION_INTERCEPTOR"
+const val LOGGING_INTERCEPTOR = "LOGGING_INTERCEPTOR"
 
-    @ApplicationScope
-    @Provides
-    @ApiKey
-    fun provideApiKey(): String = BuildConfig.API_KEY
+val networkModule = module {
 
-    @ApplicationScope
-    @Provides
-    open fun provideBaseUrl(): String = BuildConfig.BASE_URL
-
-    @ApplicationScope
-    @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
     }
 
-    @ApplicationScope
-    @Provides
-    fun provideAuthenticationInterceptor(@ApiKey apiKey: String) = object : Interceptor {
-        override fun intercept(chain: Interceptor.Chain): Response {
-            val original: Request = chain.request()
-            val originalHttpUrl: HttpUrl = original.url
+    fun provideAuthenticationInterceptor(
+        apiKey: String
+    ) = AuthenticationInterceptor(apiKey)
 
-            val url = originalHttpUrl.newBuilder()
-                .addQueryParameter("key", apiKey)
-                .build()
-
-            // Request customization: add request headers
-            val requestBuilder: Request.Builder = original.newBuilder()
-                .url(url)
-
-            val request: Request = requestBuilder.build()
-            return chain.proceed(request)
-        }
-    }
-
-    @ApplicationScope
-    @Provides
     fun provideOkHttpClient(
         authenticationInterceptor: Interceptor,
-        httpLoggingInterceptor: HttpLoggingInterceptor
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(authenticationInterceptor)
-            .addNetworkInterceptor(httpLoggingInterceptor)
+            .addNetworkInterceptor(loggingInterceptor)
             .build()
     }
 
-    @ApplicationScope
-    @Provides
     fun provideRetrofitClient(baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -77,9 +46,44 @@ open class NetworkModule {
             .build()
     }
 
-    @ApplicationScope
-    @Provides
     fun provideCurrentWeatherService(retrofit: Retrofit): CurrentWeatherService {
         return retrofit.create(CurrentWeatherService::class.java)
+    }
+
+    // Base Url
+    single(qualifier = named(BASE_URL)) {
+        BuildConfig.BASE_URL
+    }
+    // Api Key
+    single(qualifier = named(API_KEY)) {
+        BuildConfig.API_KEY
+    }
+
+    // Authentication Interceptor
+    single(qualifier = named(AUTHENTICATION_INTERCEPTOR)) {
+        provideAuthenticationInterceptor(get(qualifier = named(API_KEY)))
+    }
+
+    // Logging Interceptor
+    single(qualifier = named(LOGGING_INTERCEPTOR)) {
+        provideHttpLoggingInterceptor()
+    }
+
+    // OkHttp Client
+    single {
+        provideOkHttpClient(
+            get(qualifier = named(AUTHENTICATION_INTERCEPTOR)),
+            get(qualifier = named(LOGGING_INTERCEPTOR))
+        )
+    }
+
+    // Retrofit Client
+    single {
+        provideRetrofitClient(get(qualifier = named(BASE_URL)), get())
+    }
+
+    // Current Weather Service
+    single {
+        provideCurrentWeatherService(get())
     }
 }

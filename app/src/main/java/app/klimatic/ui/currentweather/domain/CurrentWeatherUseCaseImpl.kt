@@ -4,9 +4,8 @@ import app.klimatic.data.model.local.CurrentWeatherDao
 import app.klimatic.data.model.local.entity.CurrentWeatherEntity
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
-import javax.inject.Inject
 
-class CurrentWeatherUseCaseImpl @Inject constructor(
+class CurrentWeatherUseCaseImpl(
     private val currentWeatherDataRepository: CurrentWeatherDataRepository,
     private val currentWeatherDao: CurrentWeatherDao
 ) : CurrentWeatherUseCase {
