@@ -5,16 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <app.klimatic.ui.currentweather.presentation.CurrentWeatherCondition
-        android:id="@+id/currentWeatherCondition"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <app.klimatic.ui.currentweather.presentation.CurrentWeatherConditionLottieView
+        android:id="@+id/currentWeatherConditionLottieView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".75"
-        tools:visibility="visible" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias=".20"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
 
     <app.klimatic.ui.currentweather.presentation.CurrentWeatherDetailView
         android:id="@+id/currentWeather"
@@ -23,7 +21,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/currentWeatherCondition"
+        app:layout_constraintStart_toEndOf="@id/currentWeatherConditionLottieView"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
