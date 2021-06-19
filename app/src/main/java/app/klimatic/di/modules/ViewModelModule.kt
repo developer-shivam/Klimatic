@@ -1,7 +1,7 @@
 package app.klimatic.di.modules
 
 import app.klimatic.data.model.local.CurrentWeatherDao
-import app.klimatic.data.remote.weather.CurrentWeatherService
+import app.klimatic.data.remote.service.WeatherService
 import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepository
 import app.klimatic.ui.currentweather.domain.CurrentWeatherDataRepositoryImpl
 import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
@@ -13,7 +13,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
 
     fun provideWeatherRepository(
-        currentWeatherService: CurrentWeatherService
+        currentWeatherService: WeatherService
     ): CurrentWeatherDataRepository {
         return CurrentWeatherDataRepositoryImpl(currentWeatherService)
     }
