@@ -48,5 +48,4 @@ class CurrentWeatherViewModel(
             foreCastListener.postValue(viewState)
         }
     }
-
 }

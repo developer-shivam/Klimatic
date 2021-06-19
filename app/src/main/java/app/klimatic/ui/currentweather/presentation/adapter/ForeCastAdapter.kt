@@ -55,5 +55,4 @@ class ForeCastAdapter(private val context: Context) :
         val ivWeather: ImageView = itemView.ivWeather
         val tvTemp: TextView = itemView.tvTemp
     }
-
 }

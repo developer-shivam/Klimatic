@@ -89,7 +89,6 @@ class CurrentWeatherFragment : BaseFragment() {
                         hideForeCastView()
                     })
             })
-
         }
     }
 
@@ -103,6 +102,4 @@ class CurrentWeatherFragment : BaseFragment() {
         tvToday.hide()
         rvForeCast.hide()
     }
-
-
 }

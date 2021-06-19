@@ -7,7 +7,8 @@ import androidx.annotation.StringRes
 import app.klimatic.ui.utils.Constants.EMPTY
 import app.klimatic.ui.utils.Constants.SPACE
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 fun Context.toast(text: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, text, duration).show()

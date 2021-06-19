@@ -27,5 +27,5 @@ interface CurrentWeatherUseCase {
 
     suspend fun fetchForeCast(
         query: String
-    ) : Response<ForeCastWeatherResponse>
+    ): Response<ForeCastWeatherResponse>
 }
