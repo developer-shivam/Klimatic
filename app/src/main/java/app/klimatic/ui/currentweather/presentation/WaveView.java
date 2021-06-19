@@ -127,20 +127,20 @@ public class WaveView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(getContext().getResources().getColor(R.color.blue));
+//        canvas.drawColor(getContext().getResources().getColor(R.color.blue));
         quadrant = getHeight() / 3;
         width = canvas.getWidth();
 
         firstWavePath.moveTo(0, getHeight());
         secondWavePath.moveTo(0, getHeight());
-        firstWavePath.lineTo(0, quadrant * 1.8f);
-        secondWavePath.lineTo(0, quadrant * 1.9f);
+        firstWavePath.lineTo(0, quadrant * 1.9f);
+        secondWavePath.lineTo(0, quadrant * 2.0f);
 
         for (int i = 0; i < width + 10; i = i + 10) {
             x = (float) i;
 
-            y1 = quadrant * 1.8f + amplitude * (float) Math.sin(((i + 10) * Math.PI / frequency1) + shift1);
-            y2 = quadrant * 1.9f + amplitude * (float) Math.sin(((i + 10) * Math.PI / frequency2) + shift2);
+            y1 = quadrant * 1.9f + amplitude * (float) Math.sin(((i + 10) * Math.PI / frequency1) + shift1);
+            y2 = quadrant * 2.0f + amplitude * (float) Math.sin(((i + 10) * Math.PI / frequency2) + shift2);
 
             firstWavePath.lineTo(x, y1);
             secondWavePath.lineTo(x, y2);
