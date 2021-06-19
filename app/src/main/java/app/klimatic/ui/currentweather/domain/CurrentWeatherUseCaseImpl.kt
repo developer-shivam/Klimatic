@@ -42,4 +42,7 @@ class CurrentWeatherUseCaseImpl(
             )
         )
     }
+
+    override suspend fun fetchForeCast(query: String) =
+        currentWeatherDataRepository.fetchForeCast(query)
 }

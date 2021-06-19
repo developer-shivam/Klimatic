@@ -1,6 +1,7 @@
 package app.klimatic.ui.currentweather.domain
 
 import app.klimatic.data.model.local.entity.CurrentWeatherEntity
+import app.klimatic.data.remote.forecast.ForeCastWeatherResponse
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
 
@@ -23,4 +24,8 @@ interface CurrentWeatherUseCase {
         data: CurrentWeatherResponse,
         lastUpdateTime: Long
     )
+
+    suspend fun fetchForeCast(
+        query: String
+    ): Response<ForeCastWeatherResponse>
 }

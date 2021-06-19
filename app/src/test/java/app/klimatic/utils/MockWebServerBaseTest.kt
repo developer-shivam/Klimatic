@@ -1,6 +1,6 @@
 package app.klimatic.utils
 
-import app.klimatic.data.remote.weather.CurrentWeatherService
+import app.klimatic.data.remote.service.WeatherService
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -48,9 +48,9 @@ abstract class MockWebServerBaseTest {
         return String(file.readBytes())
     }
 
-    fun provideTestCurrentWeatherService(): CurrentWeatherService {
+    fun provideTestCurrentWeatherService(): WeatherService {
         return Retrofit.Builder().baseUrl(mockServer.url("/")).addConverterFactory(
             GsonConverterFactory.create())
-            .client(OkHttpClient.Builder().build()).build().create(CurrentWeatherService::class.java)
+            .client(OkHttpClient.Builder().build()).build().create(WeatherService::class.java)
     }
 }

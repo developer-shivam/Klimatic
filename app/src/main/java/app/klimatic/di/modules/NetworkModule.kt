@@ -2,7 +2,8 @@ package app.klimatic.di.modules
 
 import app.klimatic.BuildConfig
 import app.klimatic.data.remote.interceptors.AuthenticationInterceptor
-import app.klimatic.data.remote.weather.CurrentWeatherService
+import app.klimatic.data.remote.service.WeatherService
+import java.util.concurrent.TimeUnit
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +34,8 @@ val networkModule = module {
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(authenticationInterceptor)
             .addNetworkInterceptor(loggingInterceptor)
             .build()
@@ -46,8 +49,8 @@ val networkModule = module {
             .build()
     }
 
-    fun provideCurrentWeatherService(retrofit: Retrofit): CurrentWeatherService {
-        return retrofit.create(CurrentWeatherService::class.java)
+    fun provideCurrentWeatherService(retrofit: Retrofit): WeatherService {
+        return retrofit.create(WeatherService::class.java)
     }
 
     // Base Url
