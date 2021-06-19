@@ -18,9 +18,6 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Run Tests
-        run: ./gradlew test
-
       - name: Build Apk
         run: ./gradlew assembleRelease
 
