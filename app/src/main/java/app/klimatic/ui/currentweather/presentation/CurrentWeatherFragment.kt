@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLo
 import kotlinx.android.synthetic.main.fragment_weather.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.tvToday
 import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
+import kotlinx.android.synthetic.main.fragment_weather.waveView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CurrentWeatherFragment : BaseFragment() {
@@ -41,6 +42,7 @@ class CurrentWeatherFragment : BaseFragment() {
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
         setUpForeCastView(view)
+        waveView.setLifecycle(lifecycle)
         currentWeatherViewModel.fetchCurrentWeather(query)
         currentWeatherViewModel.fetchForeCast(query)
     }

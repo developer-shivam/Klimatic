@@ -40,8 +40,6 @@ class CurrentWeatherViewModelMockKTest {
         robot.tearDown()
     }
 
-    /************ Tests for fetch current weather ************/
-    /************ Start ************/
     @Test
     fun `GIVEN query WHEN fetch current weather api RETURNS current weather response WHILE fetching current weather THEN post success`()= robot.run {
         val weatherSlot = slot<ViewState.Success<CurrentWeatherResponse>>()
@@ -64,9 +62,11 @@ class CurrentWeatherViewModelMockKTest {
         val weatherSlot = slot<ViewState.Success<CurrentWeatherResponse>>()
         val expectValue = TestFactory.currentWeatherResponse
         coEveryFetchCurrentWeatherApiReturns(value = Response.Success(data = expectValue))
-        viewModel.fetchCurrentWeather()
-        verify {
-            verifyWeatherObserver(value = capture(weatherSlot))
+        testCoroutineRule.runBlockingTest {
+            viewModel.fetchCurrentWeather()
+            verify {
+                verifyWeatherObserver(value = capture(weatherSlot))
+            }
         }
         val actualValue = weatherSlot.captured
         assertThat(actualValue.data.current).isEqualTo(expectValue.current)
@@ -77,21 +77,23 @@ class CurrentWeatherViewModelMockKTest {
     fun `GIVEN query WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() = robot.run {
         val query = "xx"
         coEveryFetchCurrentWeatherApiReturns(value = Response.Error(TestFactory.ERROR_CODE_GENERIC))
-        viewModel.fetchCurrentWeather(query = query)
-        verify {
-            verifyWeatherObserver(value = ViewState.Error(TestFactory.ERROR_CODE_GENERIC))
+        testCoroutineRule.runBlockingTest {
+            viewModel.fetchCurrentWeather(query = query)
+            verify {
+                verifyWeatherObserver(value = ViewState.Error(TestFactory.ERROR_CODE_GENERIC))
+            }
         }
     }
 
     @Test
     fun `WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() = robot.run {
         coEveryFetchCurrentWeatherApiReturns(value = Response.Error(TestFactory.ERROR_CODE_GENERIC))
-        viewModel.fetchCurrentWeather()
-        verify {
-            verifyWeatherObserver(value = ViewState.Error(TestFactory.ERROR_CODE_GENERIC))
+        testCoroutineRule.runBlockingTest {
+            viewModel.fetchCurrentWeather()
+            verify {
+                verifyWeatherObserver(value = ViewState.Error(TestFactory.ERROR_CODE_GENERIC))
+            }
         }
     }
-
-    /************ END ************/
 
 }
