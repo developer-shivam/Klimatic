@@ -16,6 +16,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class CurrentWeatherViewModelMockKTest {
 
     @ExperimentalCoroutinesApi
@@ -25,7 +26,7 @@ class CurrentWeatherViewModelMockKTest {
     @get:Rule
     val instantTaskExecutor = InstantTaskExecutorRule()
 
-    lateinit var robot: CurrentWeatherViewModelMockKTestRobot
+    private lateinit var robot: CurrentWeatherViewModelMockKTestRobot
 
     @Before
     fun setUp() {
@@ -47,9 +48,11 @@ class CurrentWeatherViewModelMockKTest {
         val query = "xx"
         val expectValue = TestFactory.currentWeatherResponse
         coEveryFetchCurrentWeatherApiReturns(value = Response.Success(data = expectValue))
-        viewModel.fetchCurrentWeather(query = query)
-        verify {
-            verifyWeatherObserver(value = capture(weatherSlot))
+        testCoroutineRule.runBlockingTest {
+            viewModel.fetchCurrentWeather(query = query)
+            verify {
+                verifyWeatherObserver(value = capture(weatherSlot))
+            }
         }
         val actualValue = weatherSlot.captured
         assertThat(actualValue.data.current).isEqualTo(expectValue.current)

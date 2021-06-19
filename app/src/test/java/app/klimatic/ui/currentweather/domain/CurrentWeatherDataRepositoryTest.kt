@@ -1,11 +1,10 @@
 package app.klimatic.ui.currentweather.domain
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import app.klimatic.data.remote.weather.CurrentWeatherService
+import app.klimatic.data.remote.service.WeatherService
 import app.klimatic.data.response.Response
 import app.klimatic.ui.utils.ErrorUtils
 import app.klimatic.utils.MockWebServerBaseTest
-import app.klimatic.utils.factory.TestFactory
 import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -24,15 +23,15 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
-    private lateinit var currentWeatherService: CurrentWeatherService
+    private lateinit var weatherService: WeatherService
 
     // Subject under test
     private lateinit var currentWeatherDataRepository: CurrentWeatherDataRepository
 
     @Before
     fun start() {
-        currentWeatherService = provideTestCurrentWeatherService()
-        currentWeatherDataRepository = CurrentWeatherDataRepositoryImpl(currentWeatherService)
+        weatherService = provideTestCurrentWeatherService()
+        currentWeatherDataRepository = CurrentWeatherDataRepositoryImpl(weatherService)
     }
 
     @Test

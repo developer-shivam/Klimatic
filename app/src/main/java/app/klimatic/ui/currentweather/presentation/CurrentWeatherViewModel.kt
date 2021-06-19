@@ -1,6 +1,7 @@
 package app.klimatic.ui.currentweather.presentation
 
 import androidx.lifecycle.MutableLiveData
+import app.klimatic.data.remote.forecast.ForeCastWeatherResponse
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
 import app.klimatic.ui.base.BaseCoroutinesViewModel
@@ -13,7 +14,7 @@ class CurrentWeatherViewModel(
 ) : BaseCoroutinesViewModel() {
 
     val weatherListener = MutableLiveData<ViewState<CurrentWeatherResponse>>()
-
+    val foreCastListener = MutableLiveData<ViewState<ForeCastWeatherResponse>>()
     /**
      * query possible values
      * 1. Latitude and Longitude (Decimal degree) e.g: query=48.8567,2.3508
@@ -33,4 +34,19 @@ class CurrentWeatherViewModel(
             weatherListener.postValue(viewState)
         }
     }
+
+    fun fetchForeCast(query: String) {
+        ioScope.launch {
+            val viewState: ViewState<ForeCastWeatherResponse> =
+                when (val response =
+                    useCase.fetchForeCast(query)) {
+                    is Response.Success -> {
+                        ViewState.Success(data = response.data)
+                    }
+                    is Response.Error -> ViewState.Error(code = response.errorCode)
+                }
+            foreCastListener.postValue(viewState)
+        }
+    }
+
 }
