@@ -15,7 +15,9 @@ import app.klimatic.ui.utils.hide
 import app.klimatic.ui.utils.show
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
+import kotlinx.android.synthetic.main.fragment_weather.errorView
 import kotlinx.android.synthetic.main.fragment_weather.rvForeCast
+import kotlinx.android.synthetic.main.fragment_weather.swipeRefreshLayout
 import kotlinx.android.synthetic.main.fragment_weather.tvToday
 import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.waveView
@@ -31,8 +33,6 @@ class CurrentWeatherFragment : BaseFragment() {
         }
     }
 
-    private val query: String = "DELHI"
-
     companion object {
         fun create() = CurrentWeatherFragment()
     }
@@ -43,8 +43,17 @@ class CurrentWeatherFragment : BaseFragment() {
         setupObservers()
         setUpForeCastView(view)
         waveView.setLifecycle(lifecycle)
-        currentWeatherViewModel.fetchCurrentWeather(query)
-        currentWeatherViewModel.fetchForeCast(query)
+
+        swipeRefreshLayout.setOnRefreshListener {
+            fetchWeather()
+        }
+
+        fetchWeather()
+    }
+
+    private fun fetchWeather() {
+        currentWeatherViewModel.fetchCurrentWeather()
+        currentWeatherViewModel.fetchForeCast()
     }
 
     private fun setUpForeCastView(view: View) {
@@ -60,7 +69,9 @@ class CurrentWeatherFragment : BaseFragment() {
             weatherListener.observe(this@CurrentWeatherFragment, Observer { state ->
                 handleState(state,
                     { data ->
+                        swipeRefreshLayout.isRefreshing = false
                         if (data.location != null && data.current != null) {
+                            errorView.hide()
                             currentWeather.show()
                             currentWeather.setCurrentWeatherData(data)
 
@@ -71,11 +82,17 @@ class CurrentWeatherFragment : BaseFragment() {
                                     data.current.condition
                                 )
                             }
+                        } else {
+                            errorView.show()
                         }
                     }, {
+                        swipeRefreshLayout.isRefreshing = false
                         currentWeather.hide()
                         currentWeatherConditionLottieView.hide()
-                    })
+                        errorView.show()
+                    }, {
+                        swipeRefreshLayout.isRefreshing = true
+                    }, {})
             })
 
             foreCastListener.observe(this@CurrentWeatherFragment, Observer { state ->

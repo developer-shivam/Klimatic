@@ -10,5 +10,7 @@
     <string name="wind_kph">%.2f k/h</string>
     <string name="https_link">https:%s</string>
     <string name="today">TODAY</string>
+    <string name="error_title">Sorry! We couldn\&apos;t fetch the weather forecast.</string>
+    <string name="error_subtitle">Swipe down to try again</string>
 
 </resources>

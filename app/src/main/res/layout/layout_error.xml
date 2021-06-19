@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieErrorAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_fileName="error.json"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvErrorTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/error_title"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dimen24"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/lottieErrorAnimationView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/error_subtitle"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dimen16"
+        android:textAlignment="center"
+        android:textSize="@dimen/text12"
+        app:layout_constraintTop_toBottomOf="@id/tvErrorTitle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
