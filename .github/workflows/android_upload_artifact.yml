@@ -27,4 +27,4 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: developers
-          file: app/build/outputs/apk/release/app-debug-unsigned.apk
+          file: app/build/outputs/apk/debug/app-debug.apk
