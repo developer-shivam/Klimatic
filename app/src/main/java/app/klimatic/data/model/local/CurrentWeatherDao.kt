@@ -18,4 +18,7 @@ interface CurrentWeatherDao {
 
     @Delete
     fun delete(entity: CurrentWeatherEntity)
+
+    @Query("DELETE from currentweatherentity")
+    fun clearDb()
 }
