@@ -1,6 +1,7 @@
 package app.klimatic.utils.robots
 
 import androidx.lifecycle.Observer
+import app.klimatic.data.remote.forecast.ForeCastWeatherResponse
 import app.klimatic.data.remote.weather.CurrentWeatherResponse
 import app.klimatic.data.response.Response
 import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
@@ -33,6 +34,10 @@ class CurrentWeatherViewModelMockKTestRobot {
 
     fun coEveryFetchCurrentWeatherApiReturns(value: Response<CurrentWeatherResponse>) {
         coEvery { useCase.fetchCurrentWeather(any()) } returns value
+    }
+
+    fun coEveryFetchForeCastApiReturns() {
+        coEvery { useCase.fetchForeCast(any()) } returns Response.Error<ForeCastWeatherResponse>()
     }
 
     fun tearDown() {
