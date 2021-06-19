@@ -10,7 +10,7 @@ import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hide
 import app.klimatic.ui.utils.show
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
-import kotlinx.android.synthetic.main.fragment_weather.currentWeatherCondition
+import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CurrentWeatherFragment : BaseFragment() {
@@ -36,9 +36,9 @@ class CurrentWeatherFragment : BaseFragment() {
                         currentWeather.show()
                         currentWeather.setCurrentWeatherData(data)
 
-                        if (data.current.condition != null) {
-                            currentWeatherCondition.show()
-                            currentWeatherCondition.setCurrentWeatherCondition(
+                        data.current.condition?.let {
+                            currentWeatherConditionLottieView.show()
+                            currentWeatherConditionLottieView.setCurrentWeatherCondition(
                                 data.current.isDay == DAY,
                                 data.current.condition
                             )
@@ -46,7 +46,7 @@ class CurrentWeatherFragment : BaseFragment() {
                     }
                 }, {
                     currentWeather.hide()
-                    currentWeatherCondition.hide()
+                    currentWeatherConditionLottieView.hide()
                 })
         })
     }

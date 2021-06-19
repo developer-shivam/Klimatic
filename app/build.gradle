@@ -73,6 +73,10 @@ dependencies {
     def liveDataKtxVersion = "2.4.0-alpha01"
     implementation  "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
 
+    /* Lottie */
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
     /* Multidex */
     implementation 'com.android.support:multidex:1.0.3'
 

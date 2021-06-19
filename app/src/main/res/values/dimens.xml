@@ -27,6 +27,8 @@
     <dimen name="dimen28">28dp</dimen>
     <dimen name="dimen32">32dp</dimen>
     <dimen name="dimen36">36dp</dimen>
+    <dimen name="dimen40">40dp</dimen>
+    <dimen name="dimen42">42dp</dimen>
     <dimen name="dimen48">48dp</dimen>
     <dimen name="dimen56">56dp</dimen>
     <dimen name="dimen200">200dp</dimen>

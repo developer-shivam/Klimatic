@@ -4,7 +4,7 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="wind_direction">Wind Direction</string>
     <string name="humidity">Humidity</string>
-    <string name="two_place_text" formatted="false">%s %s</string>
+    <string name="two_place_text" formatted="false">%s&#44; %s</string>
     <string name="wind_direction_value" formatted="false">%s° %s</string>
     <string name="temp_c">"%.0f °C"</string>
     <string name="wind_kph">%.2f k/h</string>
