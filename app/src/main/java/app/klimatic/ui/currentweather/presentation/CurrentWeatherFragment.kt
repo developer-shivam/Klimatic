@@ -25,7 +25,7 @@ class CurrentWeatherFragment : BaseFragment() {
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
-        currentWeatherViewModel.fetchCurrentWeather("Delhi")
+        currentWeatherViewModel.fetchCurrentWeather()
     }
 
     private fun setupObservers() {
