@@ -2,7 +2,7 @@ package app.klimatic.di.module
 
 import app.klimatic.BuildConfig
 import app.klimatic.data.remote.interceptors.AuthenticationInterceptor
-import app.klimatic.data.remote.weather.CurrentWeatherService
+import app.klimatic.data.remote.service.WeatherService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -46,8 +46,8 @@ val testNetworkModule = module {
             .build()
     }
 
-    fun provideCurrentWeatherService(retrofit: Retrofit): CurrentWeatherService {
-        return retrofit.create(CurrentWeatherService::class.java)
+    fun provideCurrentWeatherService(retrofit: Retrofit): WeatherService {
+        return retrofit.create(WeatherService::class.java)
     }
 
     // Base Url

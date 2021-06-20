@@ -22,6 +22,7 @@ class CurrentWeatherViewModel(
      * 3. auto:ip IP lookup e.g: query=auto:ip (No location permission needed)
      * */
     fun fetchCurrentWeather(query: String = "auto:ip") {
+        weatherListener.value = ViewState.ShowLoading()
         ioScope.launch {
             val viewState: ViewState<CurrentWeatherResponse> =
                 when (val response =
@@ -35,7 +36,7 @@ class CurrentWeatherViewModel(
         }
     }
 
-    fun fetchForeCast(query: String) {
+    fun fetchForeCast(query: String = "auto:ip") {
         ioScope.launch {
             val viewState: ViewState<ForeCastWeatherResponse> =
                 when (val response =
