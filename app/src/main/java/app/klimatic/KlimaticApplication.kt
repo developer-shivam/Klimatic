@@ -1,9 +1,7 @@
 package app.klimatic
 
 import android.app.Application
-import app.klimatic.di.modules.databaseModule
-import app.klimatic.di.modules.networkModule
-import app.klimatic.di.modules.viewModelModule
+import app.klimatic.di.modules.appModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,13 +15,9 @@ open class KlimaticApplication : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@KlimaticApplication)
-            modules(
-                listOf(
-                    getNetworkModule(), databaseModule, viewModelModule
-                )
-            )
+            modules(getAppModules())
         }
     }
 
-    open fun getNetworkModule() = networkModule
+    open fun getAppModules() = appModules
 }

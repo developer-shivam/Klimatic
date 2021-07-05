@@ -4,42 +4,24 @@ import android.content.Context
 import androidx.room.Room
 import app.klimatic.data.model.local.AppDatabase
 import app.klimatic.data.model.local.WeatherDao
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
-
-const val DATABASE_NAME = "DATABASE_NAME"
 
 const val DB_NAME = "klimatic-database"
 
 val databaseModule = module {
+    single { provideAppDatabase(get()) }
+    single { provideWeatherDao(get()) }
+}
 
-    fun provideAppDatabase(
-        context: Context,
-        databaseName: String
-    ): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
-            .build()
-    }
+private fun provideAppDatabase(
+    context: Context
+): AppDatabase {
+    return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
+        .build()
+}
 
     fun provideWeatherDao(
         appDatabase: AppDatabase
     ): WeatherDao {
         return appDatabase.weatherDao()
     }
-
-    // Database name
-    single(qualifier = named(DATABASE_NAME)) {
-        DB_NAME
-    }
-
-    // AppDatabase
-    single {
-        provideAppDatabase(androidContext(), get(qualifier = named(DATABASE_NAME)))
-    }
-
-    // Current Weather Dao
-    single {
-        provideWeatherDao(get())
-    }
-}
