@@ -1,4 +1,4 @@
-package app.klimatic.ui.currentweather.presentation
+package app.klimatic.ui.weather.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
 import app.klimatic.data.model.weather.Current.Companion.DAY
 import app.klimatic.ui.base.BaseFragment
-import app.klimatic.ui.currentweather.presentation.adapter.ForeCastAdapter
 import app.klimatic.ui.utils.getCurrentHours
 import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hide
 import app.klimatic.ui.utils.show
+import app.klimatic.ui.weather.presentation.adapter.ForeCastAdapter
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
 import kotlinx.android.synthetic.main.fragment_weather.errorView
@@ -23,9 +23,9 @@ import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.waveView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CurrentWeatherFragment : BaseFragment() {
+class WeatherFragment : BaseFragment() {
 
-    private val currentWeatherViewModel by viewModel<CurrentWeatherViewModel>()
+    private val weatherViewModel by viewModel<WeatherViewModel>()
 
     private val foreCastAdapter by lazy {
         context?.let {
@@ -34,7 +34,7 @@ class CurrentWeatherFragment : BaseFragment() {
     }
 
     companion object {
-        fun create() = CurrentWeatherFragment()
+        fun create() = WeatherFragment()
     }
 
     override fun getLayoutResource(): Int = R.layout.fragment_weather
@@ -52,8 +52,8 @@ class CurrentWeatherFragment : BaseFragment() {
     }
 
     private fun fetchWeather() {
-        currentWeatherViewModel.fetchCurrentWeather()
-        currentWeatherViewModel.fetchForeCast()
+        weatherViewModel.fetchWeatherLocal()
+        weatherViewModel.fetchWeatherRemote()
     }
 
     private fun setUpForeCastView(view: View) {
@@ -65,8 +65,8 @@ class CurrentWeatherFragment : BaseFragment() {
     }
 
     private fun setupObservers() {
-        currentWeatherViewModel.run {
-            weatherListener.observe(this@CurrentWeatherFragment, Observer { state ->
+        weatherViewModel.run {
+            weather.observe(this@WeatherFragment, Observer { state ->
                 handleState(state,
                     { data ->
                         swipeRefreshLayout.isRefreshing = false
@@ -82,6 +82,11 @@ class CurrentWeatherFragment : BaseFragment() {
                                     data.current.condition
                                 )
                             }
+
+                            foreCastAdapter?.updateForeCastData(
+                                updatedList = data.forecast?.forecastDay?.get(0)?.hour
+                            )
+                            showForeCastView()
                         } else {
                             errorView.show()
                         }
@@ -89,24 +94,11 @@ class CurrentWeatherFragment : BaseFragment() {
                         swipeRefreshLayout.isRefreshing = false
                         currentWeather.hide()
                         currentWeatherConditionLottieView.hide()
+                        hideForeCastView()
                         errorView.show()
                     }, {
                         swipeRefreshLayout.isRefreshing = true
                     }, {})
-            })
-
-            foreCastListener.observe(this@CurrentWeatherFragment, Observer { state ->
-                handleState(state,
-                    { data ->
-                        foreCastAdapter?.updateForeCastData(
-                            updatedList = data.forecast?.forecastDay?.get(
-                                0
-                            )?.hour
-                        )
-                        showForeCastView()
-                    }, {
-                        hideForeCastView()
-                    })
             })
         }
     }

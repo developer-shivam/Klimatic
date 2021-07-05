@@ -1,4 +1,4 @@
-package app.klimatic.ui.currentweather.presentation;
+package app.klimatic.ui.weather.presentation;
 
 /**
  * This is library implementation of Wave View

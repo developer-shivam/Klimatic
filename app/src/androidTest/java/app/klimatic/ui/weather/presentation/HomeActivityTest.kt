@@ -1,4 +1,4 @@
-package app.klimatic.ui.currentweather.presentation
+package app.klimatic.ui.weather.presentation
 
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView

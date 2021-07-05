@@ -1,12 +1,12 @@
 package app.klimatic
 
-import app.klimatic.data.model.local.CurrentWeatherDao
+import app.klimatic.data.model.local.WeatherDao
 import app.klimatic.di.module.testNetworkModule
 import org.koin.android.ext.android.inject
 
 class TestKlimaticApplication : KlimaticApplication() {
 
-    private val currentWeatherDao: CurrentWeatherDao by inject()
+    private val currentWeatherDao: WeatherDao by inject()
 
     override fun getNetworkModule() = testNetworkModule
 

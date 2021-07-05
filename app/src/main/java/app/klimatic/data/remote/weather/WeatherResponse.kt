@@ -1,12 +1,15 @@
 package app.klimatic.data.remote.weather
 
 import app.klimatic.data.model.weather.Current
+import app.klimatic.data.model.weather.ForeCast
 import app.klimatic.data.model.weather.Location
 import com.google.gson.annotations.SerializedName
 
-data class CurrentWeatherResponse(
+data class WeatherResponse(
     @SerializedName("location")
     val location: Location?,
     @SerializedName("current")
-    val current: Current?
+    val current: Current?,
+    @SerializedName("forecast")
+    val forecast: ForeCast?
 )

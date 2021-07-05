@@ -3,7 +3,7 @@ package app.klimatic.di.modules
 import android.content.Context
 import androidx.room.Room
 import app.klimatic.data.model.local.AppDatabase
-import app.klimatic.data.model.local.CurrentWeatherDao
+import app.klimatic.data.model.local.WeatherDao
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -22,10 +22,10 @@ val databaseModule = module {
             .build()
     }
 
-    fun provideCurrentWeatherDao(
+    fun provideWeatherDao(
         appDatabase: AppDatabase
-    ): CurrentWeatherDao {
-        return appDatabase.currentWeatherDao()
+    ): WeatherDao {
+        return appDatabase.weatherDao()
     }
 
     // Database name
@@ -40,6 +40,6 @@ val databaseModule = module {
 
     // Current Weather Dao
     single {
-        provideCurrentWeatherDao(get())
+        provideWeatherDao(get())
     }
 }

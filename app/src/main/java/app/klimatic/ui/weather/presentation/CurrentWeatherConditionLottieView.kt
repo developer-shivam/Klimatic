@@ -1,4 +1,4 @@
-package app.klimatic.ui.currentweather.presentation
+package app.klimatic.ui.weather.presentation
 
 import android.content.Context
 import android.util.AttributeSet
@@ -103,5 +103,6 @@ class CurrentWeatherConditionLottieView @JvmOverloads constructor(
                 lottieAnimationView.setAnimation("weather_snow.json")
             }
         }
+        lottieAnimationView.playAnimation()
     }
 }

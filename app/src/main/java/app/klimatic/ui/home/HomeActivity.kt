@@ -3,7 +3,7 @@ package app.klimatic.ui.home
 import android.os.Bundle
 import app.klimatic.R
 import app.klimatic.ui.base.BaseActivity
-import app.klimatic.ui.currentweather.presentation.CurrentWeatherFragment
+import app.klimatic.ui.weather.presentation.WeatherFragment
 import kotlinx.android.synthetic.main.activity_home.container
 
 class HomeActivity : BaseActivity() {
@@ -13,7 +13,7 @@ class HomeActivity : BaseActivity() {
     override fun setupView(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(container.id, CurrentWeatherFragment.create())
+            transaction.add(container.id, WeatherFragment.create())
             transaction.commit()
         }
     }
