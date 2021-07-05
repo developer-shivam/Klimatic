@@ -15,7 +15,9 @@ open class KlimaticApplication : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@KlimaticApplication)
-            modules(appModules)
+            modules(getAppModules())
         }
     }
+
+    open fun getAppModules() = appModules
 }
