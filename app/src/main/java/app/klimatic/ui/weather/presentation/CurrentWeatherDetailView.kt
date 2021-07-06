@@ -1,4 +1,4 @@
-package app.klimatic.ui.currentweather.presentation
+package app.klimatic.ui.weather.presentation
 
 import android.content.Context
 import android.text.TextUtils
@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import app.klimatic.R
-import app.klimatic.data.remote.weather.CurrentWeatherResponse
+import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.ui.utils.hide
 import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvCurrentTemp
 import kotlinx.android.synthetic.main.layout_current_weather_detail.view.tvCurrentWeatherCondition
@@ -25,7 +25,7 @@ class CurrentWeatherDetailView @JvmOverloads constructor(
     private var view = LayoutInflater.from(context)
         .inflate(R.layout.layout_current_weather_detail, this, true)
 
-    fun setCurrentWeatherData(currentWeatherResponse: CurrentWeatherResponse?) {
+    fun setCurrentWeatherData(currentWeatherResponse: WeatherResponse?) {
 
         view.run {
             val location = currentWeatherResponse?.location

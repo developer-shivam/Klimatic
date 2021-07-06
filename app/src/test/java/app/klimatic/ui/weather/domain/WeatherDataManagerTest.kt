@@ -1,6 +1,7 @@
-package app.klimatic.ui.currentweather.domain
+package app.klimatic.ui.weather.domain
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import app.klimatic.data.model.local.WeatherDao
 import app.klimatic.data.remote.service.WeatherService
 import app.klimatic.data.response.Response
 import app.klimatic.ui.utils.ErrorUtils
@@ -15,23 +16,29 @@ import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import java.net.HttpURLConnection.HTTP_OK
 
 @RunWith(JUnit4::class)
-class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
+class WeatherDataManagerTest : MockWebServerBaseTest() {
 
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
+    @Mock
+    private lateinit var dao: WeatherDao
+
     private lateinit var weatherService: WeatherService
 
     // Subject under test
-    private lateinit var currentWeatherDataRepository: CurrentWeatherDataRepository
+    private lateinit var weatherDataManager: WeatherDataManager
 
     @Before
     fun start() {
+        MockitoAnnotations.initMocks(this)
         weatherService = provideTestCurrentWeatherService()
-        currentWeatherDataRepository = CurrentWeatherDataRepositoryImpl(weatherService)
+        weatherDataManager = WeatherDataManagerImpl(dao, weatherService)
     }
 
     @Test
@@ -43,7 +50,7 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
 
             // When
             val actual =
-                currentWeatherDataRepository.fetchCurrentWeather(EMPTY_QUERY)
+                weatherDataManager.fetchWeatherRemote(EMPTY_QUERY)
 
             // Then
             assertTrue(actual is Response.Success)
@@ -62,7 +69,7 @@ class CurrentWeatherDataRepositoryTest : MockWebServerBaseTest() {
 
             // When
             val actual =
-                currentWeatherDataRepository.fetchCurrentWeather(EMPTY_QUERY)
+                weatherDataManager.fetchWeatherRemote(EMPTY_QUERY)
 
             // Then
             assertTrue(actual is Response.Error)

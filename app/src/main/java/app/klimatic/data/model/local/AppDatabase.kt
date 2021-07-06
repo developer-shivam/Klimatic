@@ -3,17 +3,17 @@ package app.klimatic.data.model.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import app.klimatic.data.model.local.entity.CurrentWeatherEntity
+import app.klimatic.data.model.local.entity.Weather
 
 @Database(
     entities = [
-        CurrentWeatherEntity::class
+        Weather::class
     ],
     version = 1,
     exportSchema = false
 )
-@TypeConverters(CurrentWeatherTypeConverter::class)
+@TypeConverters(TypeConvertersUtility::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun currentWeatherDao(): CurrentWeatherDao
+    abstract fun weatherDao(): WeatherDao
 }

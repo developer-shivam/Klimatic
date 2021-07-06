@@ -1,19 +1,13 @@
 package app.klimatic.data.remote.service
 
-import app.klimatic.data.remote.forecast.ForeCastWeatherResponse
-import app.klimatic.data.remote.weather.CurrentWeatherResponse
+import app.klimatic.data.remote.weather.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherService {
 
-    @GET("/v1/current.json")
-    suspend fun fetchCurrentWeather(
-        @Query("q") query: String?
-    ): CurrentWeatherResponse
-
     @GET("/v1/forecast.json")
-    suspend fun fetchForeCast(
+    suspend fun fetchWeather(
         @Query("q") query: String?
-    ): ForeCastWeatherResponse
+    ): WeatherResponse
 }

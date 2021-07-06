@@ -1,10 +1,10 @@
-package app.klimatic.ui.currentweather.presentation
+package app.klimatic.ui.weather.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import app.klimatic.data.remote.weather.CurrentWeatherResponse
+import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.data.response.Response
-import app.klimatic.ui.currentweather.domain.CurrentWeatherUseCase
+import app.klimatic.ui.weather.domain.WeatherDataManager
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
 import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
@@ -17,16 +17,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
-import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.anyString
 import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.`when` as whenever
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
-class CurrentWeatherViewModelTest {
+class WeatherViewModelTest {
 
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
@@ -35,23 +32,24 @@ class CurrentWeatherViewModelTest {
     val testCoroutineRule = TestCoroutineRule()
 
     @Mock
-    private lateinit var useCase: CurrentWeatherUseCase
+    private lateinit var repository: WeatherDataManager
 
     @Mock
-    private lateinit var weatherObserver: Observer<ViewState<CurrentWeatherResponse>>
+    private lateinit var weatherObserver: Observer<ViewState<WeatherResponse>>
 
     @Mock
-    private lateinit var currentWeatherResponse: CurrentWeatherResponse
+    private lateinit var weatherResponse: WeatherResponse
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
     private val testCoroutineScope = TestCoroutineScope(testCoroutineDispatcher)
 
-    private lateinit var viewModel: CurrentWeatherViewModel
+    private lateinit var viewModel: WeatherViewModel
 
     @Before
     fun setup() {
-        viewModel = CurrentWeatherViewModel(useCase).apply {
-            weatherListener.observeForever(weatherObserver)
+        MockitoAnnotations.initMocks(this)
+        viewModel = WeatherViewModel(repository).apply {
+            weather.observeForever(weatherObserver)
             ioScope = testCoroutineScope
         }
     }
@@ -61,14 +59,14 @@ class CurrentWeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             // Given
-            whenever(useCase.fetchCurrentWeather(EMPTY_QUERY))
-                .thenReturn(Response.Success(currentWeatherResponse))
+            whenever(repository.fetchWeatherRemote(EMPTY_QUERY))
+                .thenReturn(Response.Success(weatherResponse))
 
             // When
-            viewModel.fetchCurrentWeather(EMPTY_QUERY)
+            viewModel.fetchWeatherRemote(EMPTY_QUERY)
 
             // Then
-            verify(weatherObserver).onChanged(ViewState.Success(currentWeatherResponse))
+            verify(weatherObserver).onChanged(ViewState.Success(weatherResponse))
         }
     }
 
@@ -77,11 +75,11 @@ class CurrentWeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             // Given
-            whenever(useCase.fetchCurrentWeather(EMPTY_QUERY))
+            whenever(repository.fetchWeatherRemote(EMPTY_QUERY))
                 .thenReturn(Response.Error(MOCKED_ERROR_CODE))
 
             // When
-            viewModel.fetchCurrentWeather(EMPTY_QUERY)
+            viewModel.fetchWeatherRemote(EMPTY_QUERY)
 
             // Then
             verify(weatherObserver).onChanged(ViewState.Error(MOCKED_ERROR_CODE))
@@ -90,6 +88,6 @@ class CurrentWeatherViewModelTest {
 
     @After
     fun clear() {
-        viewModel.weatherListener.removeObserver(weatherObserver)
+        viewModel.weather.removeObserver(weatherObserver)
     }
 }
