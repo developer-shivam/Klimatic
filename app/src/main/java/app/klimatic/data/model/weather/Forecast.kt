@@ -2,17 +2,17 @@ package app.klimatic.data.model.weather
 
 import com.google.gson.annotations.SerializedName
 
-data class ForeCast(
+data class Forecast(
     @SerializedName("forecastday")
-    val forecastDay: List<ForeCastDay>?
+    val forecastDay: List<ForecastDay>?
 ) {
 
-    data class ForeCastDay(
+    data class ForecastDay(
         @SerializedName("hour")
-        val hour: List<ForeCastHour>?
+        val hour: List<ForecastHour>?
     )
 
-    data class ForeCastHour(
+    data class ForecastHour(
         @SerializedName("time")
         val time: String?,
         @SerializedName("temp_c")

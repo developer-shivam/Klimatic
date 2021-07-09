@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
-import app.klimatic.data.model.weather.ForeCast
+import app.klimatic.data.model.weather.Forecast
 import app.klimatic.ui.utils.getHours
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.layout_forecast_item.view.cvParent
@@ -17,12 +17,12 @@ import kotlinx.android.synthetic.main.layout_forecast_item.view.ivWeather
 import kotlinx.android.synthetic.main.layout_forecast_item.view.tvTemp
 import kotlinx.android.synthetic.main.layout_forecast_item.view.tvTime
 
-class ForeCastAdapter(private val context: Context) :
-    RecyclerView.Adapter<ForeCastAdapter.ViewHolder>() {
+class ForecastAdapter(private val context: Context) :
+    RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
-    private val dataList: ArrayList<ForeCast.ForeCastHour> = arrayListOf()
+    private val dataList: ArrayList<Forecast.ForecastHour> = arrayListOf()
 
-    fun updateForeCastData(updatedList: List<ForeCast.ForeCastHour>?) {
+    fun updateForeCastData(updatedList: List<Forecast.ForecastHour>?) {
         updatedList?.let {
             dataList.clear()
             dataList.addAll(it)

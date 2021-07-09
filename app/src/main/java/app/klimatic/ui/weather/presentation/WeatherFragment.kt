@@ -12,7 +12,7 @@ import app.klimatic.ui.utils.getCurrentHours
 import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hide
 import app.klimatic.ui.utils.show
-import app.klimatic.ui.weather.presentation.adapter.ForeCastAdapter
+import app.klimatic.ui.weather.presentation.adapter.ForecastAdapter
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
 import kotlinx.android.synthetic.main.fragment_weather.errorView
@@ -29,7 +29,7 @@ class WeatherFragment : BaseFragment() {
 
     private val foreCastAdapter by lazy {
         context?.let {
-            ForeCastAdapter(it)
+            ForecastAdapter(it)
         }
     }
 
