@@ -32,7 +32,7 @@ class WeatherViewModelTest {
     val testCoroutineRule = TestCoroutineRule()
 
     @Mock
-    private lateinit var repository: WeatherDataManager
+    private lateinit var dataManager: WeatherDataManager
 
     @Mock
     private lateinit var weatherObserver: Observer<ViewState<WeatherResponse>>
@@ -48,7 +48,7 @@ class WeatherViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = WeatherViewModel(repository).apply {
+        viewModel = WeatherViewModel(dataManager).apply {
             weather.observeForever(weatherObserver)
             ioScope = testCoroutineScope
         }
@@ -59,7 +59,7 @@ class WeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             // Given
-            whenever(repository.fetchWeatherRemote(EMPTY_QUERY))
+            whenever(dataManager.fetchWeatherRemote(EMPTY_QUERY))
                 .thenReturn(Response.Success(weatherResponse))
 
             // When
@@ -75,7 +75,7 @@ class WeatherViewModelTest {
         testCoroutineRule.runBlockingTest {
 
             // Given
-            whenever(repository.fetchWeatherRemote(EMPTY_QUERY))
+            whenever(dataManager.fetchWeatherRemote(EMPTY_QUERY))
                 .thenReturn(Response.Error(MOCKED_ERROR_CODE))
 
             // When

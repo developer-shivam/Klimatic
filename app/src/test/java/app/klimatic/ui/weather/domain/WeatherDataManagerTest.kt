@@ -37,7 +37,7 @@ class WeatherDataManagerTest : MockWebServerBaseTest() {
     @Before
     fun start() {
         MockitoAnnotations.initMocks(this)
-        weatherService = provideTestCurrentWeatherService()
+        weatherService = provideTestWeatherService()
         weatherDataManager = WeatherDataManagerImpl(dao, weatherService)
     }
 

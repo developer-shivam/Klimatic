@@ -48,7 +48,7 @@ abstract class MockWebServerBaseTest {
         return String(file.readBytes())
     }
 
-    fun provideTestCurrentWeatherService(): WeatherService {
+    fun provideTestWeatherService(): WeatherService {
         return Retrofit.Builder().baseUrl(mockServer.url("/")).addConverterFactory(
             GsonConverterFactory.create())
             .client(OkHttpClient.Builder().build()).build().create(WeatherService::class.java)
