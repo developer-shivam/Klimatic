@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen40"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text24"
+        app:layout_constraintVertical_bias="0"
+        android:textAlignment="viewEnd"
+        app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemp"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="New Delhi" />
+
+    <TextView
+        android:id="@+id/tvLocationRegionCountry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text16"
+        android:textAlignment="viewEnd"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemp"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLocation"
+        tools:text="New Delhi United States of America" />
+
+    <TextView
+        android:id="@+id/tvCurrentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen24"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text48"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvCurrentWeatherCondition"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@id/tvLocationRegionCountry"
+        tools:text="26 °C" />
+
+    <TextView
+        android:id="@+id/tvCurrentWeatherCondition"
+        android:layout_width="@dimen/dimen0"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentTemp"
+        tools:text="Sunny" />
+
+    <TextView
+        android:id="@+id/tvWindSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen24"
+        android:text="@string/wind_speed"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text12"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentWeatherCondition" />
+
+    <TextView
+        android:id="@+id/tvWindSpeedValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvWindSpeed"
+        tools:text="9.0 k/h" />
+
+    <TextView
+        android:id="@+id/tvWindDirection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen24"
+        android:text="@string/wind_direction"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text12"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvWindSpeedValue" />
+
+    <TextView
+        android:id="@+id/tvWindDirectionValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvWindDirection"
+        tools:text="170° S" />
+
+    <TextView
+        android:id="@+id/tvHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen24"
+        android:text="@string/humidity"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text12"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvWindDirectionValue" />
+
+    <TextView
+        android:id="@+id/tvHumidityValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text18"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintTop_toBottomOf="@+id/tvHumidity"
+        tools:text="53" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/dimen16" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

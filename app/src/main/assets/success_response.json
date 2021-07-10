@@ -1,0 +1,41 @@
+{
+  "location": {
+    "name": "Delhi",
+    "region": "Delhi",
+    "country": "India",
+    "lat": 28.67,
+    "lon": 77.22,
+    "tz_id": "Asia/Kolkata",
+    "localtime_epoch": 1623500191,
+    "localtime": "2021-06-12 17:46"
+  },
+  "current": {
+    "last_updated_epoch": 1623495600,
+    "last_updated": "2021-06-12 16:30",
+    "temp_c": 33.0,
+    "temp_f": 91.4,
+    "is_day": 1,
+    "condition": {
+      "text": "Moderate or heavy rain with thunder",
+      "icon": "//cdn.weatherapi.com/weather/64x64/day/389.png",
+      "code": 1276
+    },
+    "wind_mph": 9.4,
+    "wind_kph": 15.1,
+    "wind_degree": 100,
+    "wind_dir": "E",
+    "pressure_mb": 998.0,
+    "pressure_in": 29.9,
+    "precip_mm": 0.0,
+    "precip_in": 0.0,
+    "humidity": 59,
+    "cloud": 50,
+    "feelslike_c": 30.9,
+    "feelslike_f": 87.5,
+    "vis_km": 4.5,
+    "vis_miles": 2.0,
+    "uv": 10.0,
+    "gust_mph": 12.1,
+    "gust_kph": 19.4
+  }
+}

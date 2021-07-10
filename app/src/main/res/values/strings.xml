@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Klimatic</string>
+    <string name="error_code_generic">Something went wrong</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_direction">Wind Direction</string>
+    <string name="humidity">Humidity</string>
+    <string name="two_place_text" formatted="false">%s&#44; %s</string>
+    <string name="wind_direction_value" formatted="false">%s° %s</string>
+    <string name="temp_c">"%.0f °C"</string>
+    <string name="wind_kph">%.2f k/h</string>
+    <string name="https_link">https:%s</string>
+    <string name="today">TODAY</string>
+    <string name="error_title">Sorry! We couldn\&apos;t fetch the weather forecast.</string>
+    <string name="error_subtitle">Swipe down to try again</string>
+
+</resources>
