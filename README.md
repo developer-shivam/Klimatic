@@ -5,13 +5,11 @@
 [![Test](https://github.com/developer-shivam/Klimatic/actions/workflows/test.yml/badge.svg)](https://github.com/developer-shivam/Klimatic/actions/workflows/test.yml)
 [![Build](https://github.com/developer-shivam/Klimatic/actions/workflows/build.yml/badge.svg)](https://github.com/developer-shivam/Klimatic/actions/workflows/build.yml)
 
-
-![](media/graphic.png)
-
-
 [![GitHub stars](https://img.shields.io/github/stars/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/issues)
 [![GitHub license](https://img.shields.io/github/license/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/blob/master/LICENSE)
+
+![](media/graphic.png)
 
 ## Built using
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
