@@ -18,10 +18,16 @@
 - [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
 - [Dependency Injection](https://developer.android.com/training/dependency-injection)
   - [Koin](https://insert-koin.io/) - A smart dependency injection library.
-- [WaveView](https://github.com/developer-shivam/WaveView) - A custom view for wave animation
+- [WaveView](https://github.com/developer-shivam/WaveView) - A custom view for wave animation.
+
 
 ## Architecture
 App uses [MVVM (Model View View-Model)](https://developer.android.com/jetpack/docs/guide#recommended-app-arch) architecture.
+
+## API
+Klimatic uses <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>. Create a API Key and update **apikey.properties**
+
+    API_KEY="your-api-key"
 
 ## Contributors
 [Shivam Satija](https://github.com/developer-shivam) and [Anshul Garg](https://github.com/garganshu)
