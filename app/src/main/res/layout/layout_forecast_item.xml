@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/black"
         android:textSize="@dimen/text12"
-        tools:text="dasdadsad"/>
+        tools:text="10:00"/>
 
     <ImageView
         android:id="@+id/ivWeather"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivWeather"
         android:textColor="@color/black"
         android:textSize="@dimen/text14"
-        tools:text="dasdadsad"/>
+        tools:text="33 °C"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,6 +3,7 @@ package app.klimatic.ui.weather.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
@@ -33,22 +34,31 @@ class WeatherFragment : BaseFragment() {
         }
     }
 
-    companion object {
-        fun create() = WeatherFragment()
-    }
-
     override fun getLayoutResource(): Int = R.layout.fragment_weather
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        fetchWeather()
+    }
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
         setUpForeCastView(view)
+
         waveView.setLifecycle(lifecycle)
+
+        currentWeather.setOnCurrentLocationClickAction {
+            openLocationChooser()
+        }
 
         swipeRefreshLayout.setOnRefreshListener {
             fetchWeather()
         }
+    }
 
-        fetchWeather()
+    private fun openLocationChooser() {
+        findNavController().navigate(R.id.action_fragmentWeather_to_fragmentLocationChooser)
     }
 
     private fun fetchWeather() {

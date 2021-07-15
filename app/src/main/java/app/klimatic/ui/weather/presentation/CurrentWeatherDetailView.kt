@@ -25,6 +25,12 @@ class CurrentWeatherDetailView @JvmOverloads constructor(
     private var view = LayoutInflater.from(context)
         .inflate(R.layout.layout_current_weather_detail, this, true)
 
+    fun setOnCurrentLocationClickAction(action: () -> Unit) {
+        tvLocation.setOnClickListener {
+            action()
+        }
+    }
+
     fun setCurrentWeatherData(currentWeatherResponse: WeatherResponse?) {
 
         view.run {
