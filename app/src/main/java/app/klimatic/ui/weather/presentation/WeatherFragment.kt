@@ -34,6 +34,8 @@ class WeatherFragment : BaseFragment() {
         }
     }
 
+    private var currentSelectedLocation: String? = null
+
     override fun getLayoutResource(): Int = R.layout.fragment_weather
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +46,8 @@ class WeatherFragment : BaseFragment() {
         if (weatherViewModel.getCurrentSelectedLocation() == null) {
             openLocationChooserClosingWeatherFragment()
         } else {
-            fetchWeather()
+            currentSelectedLocation = weatherViewModel.getCurrentSelectedLocation()
+            fetchWeather(currentSelectedLocation)
         }
     }
 
@@ -59,7 +62,7 @@ class WeatherFragment : BaseFragment() {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            fetchWeather()
+            fetchWeather(currentSelectedLocation)
         }
     }
 
@@ -71,9 +74,12 @@ class WeatherFragment : BaseFragment() {
         findNavController().navigate(R.id.action_weather_to_locationChooser_closing_weather)
     }
 
-    private fun fetchWeather() {
-        weatherViewModel.fetchWeatherLocal()
-        weatherViewModel.fetchWeatherRemote()
+    private fun fetchWeather(query: String?) {
+        // btw, query will never be null
+        query?.let {
+            weatherViewModel.fetchWeatherLocal(query)
+            weatherViewModel.fetchWeatherRemote(query)
+        }
     }
 
     private fun setUpForeCastView(view: View) {

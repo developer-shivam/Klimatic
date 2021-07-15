@@ -11,33 +11,31 @@ import app.klimatic.ui.weather.domain.WeatherDataManager
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(
-    private val appSharedPreferences: AppSharedPreferences,
-    private val repository: WeatherDataManager
-) : BaseCoroutinesViewModel() {
-
-    companion object {
-        const val DEFAULT_QUERY = "auto:ip"
-    }
+    appSharedPreferences: AppSharedPreferences,
+    private val dataManager: WeatherDataManager
+) : BaseCoroutinesViewModel(
+    appSharedPreferences
+) {
 
     private val weatherLiveData = MutableLiveData<ViewState<WeatherResponse>>()
     val weather: LiveData<ViewState<WeatherResponse>> = weatherLiveData
 
-    fun fetchWeatherLocal(query: String = DEFAULT_QUERY) {
+    fun fetchWeatherLocal(query: String) {
         ioScope.launch {
-            val entity = repository.fetchWeatherLocal(query)
+            val entity = dataManager.fetchWeatherLocal(query)
             if (entity != null) {
                 weatherLiveData.postValue(ViewState.Success(entity.data))
             }
         }
     }
 
-    fun fetchWeatherRemote(query: String = DEFAULT_QUERY) {
+    fun fetchWeatherRemote(query: String) {
         ioScope.launch {
             val viewState: ViewState<WeatherResponse> =
                 when (val response =
-                    repository.fetchWeatherRemote(query)) {
+                    dataManager.fetchWeatherRemote(query)) {
                     is Response.Success -> {
-                        repository.saveWeather(query, response.data)
+                        dataManager.saveWeather(query, response.data)
                         ViewState.Success(data = response.data)
                     }
                     is Response.Error -> ViewState.Error(code = response.errorCode)
@@ -45,6 +43,4 @@ class WeatherViewModel(
             weatherLiveData.postValue(viewState)
         }
     }
-
-    fun getCurrentSelectedLocation(): String? = appSharedPreferences.getCurrentSelectedLocation()
 }

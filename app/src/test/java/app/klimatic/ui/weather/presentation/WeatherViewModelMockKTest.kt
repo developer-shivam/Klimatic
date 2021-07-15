@@ -60,10 +60,11 @@ class WeatherViewModelMockKTest {
     @Test
     fun `WHEN fetch current weather api RETURNS current weather response WHILE fetching current weather THEN post success`() = robot.run {
         val weatherSlot = slot<ViewState.Success<WeatherResponse>>()
+        val query = "xx"
         val expectValue = TestFactory.currentWeatherResponse
         coEveryFetchWeatherApiReturns(value = Response.Success(data = expectValue))
         testCoroutineRule.runBlockingTest {
-            viewModel.fetchWeatherRemote()
+            viewModel.fetchWeatherRemote(query = query)
             verify {
                 verifyWeatherObserver(value = capture(weatherSlot))
             }
@@ -87,9 +88,10 @@ class WeatherViewModelMockKTest {
 
     @Test
     fun `WHEN fetch current weather api RETURNS error WHILE fetching current weather THEN show error`() = robot.run {
+        val query = "xx"
         coEveryFetchWeatherApiReturns(value = Response.Error(TestFactory.ERROR_CODE_GENERIC))
         testCoroutineRule.runBlockingTest {
-            viewModel.fetchWeatherRemote()
+            viewModel.fetchWeatherRemote(query = query)
             verify {
                 verifyWeatherObserver(value = ViewState.Error(TestFactory.ERROR_CODE_GENERIC))
             }
