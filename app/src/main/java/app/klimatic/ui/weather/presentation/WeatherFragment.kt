@@ -38,19 +38,6 @@ class WeatherFragment : BaseFragment() {
 
     override fun getLayoutResource(): Int = R.layout.fragment_weather
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // On pressing back, if no location is selected, app will be closed.
-        // If user selects a location, HomeActivity is relaunched.
-        if (weatherViewModel.getCurrentSelectedLocation() == null) {
-            openLocationChooserClosingWeatherFragment()
-        } else {
-            currentSelectedLocation = weatherViewModel.getCurrentSelectedLocation()
-            fetchWeather(currentSelectedLocation)
-        }
-    }
-
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
         setUpForeCastView(view)
@@ -64,6 +51,8 @@ class WeatherFragment : BaseFragment() {
         swipeRefreshLayout.setOnRefreshListener {
             fetchWeather(currentSelectedLocation)
         }
+
+        weatherViewModel.fetchCurrentSelectedLocation()
     }
 
     private fun openLocationChooser() {
@@ -92,6 +81,20 @@ class WeatherFragment : BaseFragment() {
 
     private fun setupObservers() {
         weatherViewModel.run {
+
+            currentSelectedLocation.observe(
+                this@WeatherFragment,
+                Observer { currentSelectedLocation ->
+                    // On pressing back, if no location is selected, app will be closed.
+                    // If user selects a location, HomeActivity is relaunched.
+                    if (currentSelectedLocation == null) {
+                        openLocationChooserClosingWeatherFragment()
+                    } else {
+                        this@WeatherFragment.currentSelectedLocation = currentSelectedLocation
+                        fetchWeather(currentSelectedLocation)
+                    }
+                })
+
             weather.observe(this@WeatherFragment, Observer { state ->
                 handleState(state,
                     { data ->

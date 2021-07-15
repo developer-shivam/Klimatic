@@ -11,6 +11,6 @@ val preferenceModule = module {
     single { provideAppSharedPreferences(get()) }
 }
 
-fun provideAppSharedPreferences(context: Context): AppSharedPreferences {
+private fun provideAppSharedPreferences(context: Context): AppSharedPreferences {
     return AppSharedPreferencesImpl(SHARED_PREFERENCE_NAME, context)
 }
