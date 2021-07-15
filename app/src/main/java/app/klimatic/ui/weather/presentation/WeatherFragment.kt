@@ -3,6 +3,7 @@ package app.klimatic.ui.weather.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
@@ -33,22 +34,41 @@ class WeatherFragment : BaseFragment() {
         }
     }
 
-    companion object {
-        fun create() = WeatherFragment()
-    }
-
     override fun getLayoutResource(): Int = R.layout.fragment_weather
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // On pressing back, if no location is selected, app will be closed.
+        // If user selects a location, HomeActivity is relaunched.
+        if (weatherViewModel.getCurrentSelectedLocation() == null) {
+            openLocationChooserClosingWeatherFragment()
+        } else {
+            fetchWeather()
+        }
+    }
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
         setUpForeCastView(view)
+
         waveView.setLifecycle(lifecycle)
+
+        currentWeather.setOnCurrentLocationClickAction {
+            openLocationChooser()
+        }
 
         swipeRefreshLayout.setOnRefreshListener {
             fetchWeather()
         }
+    }
 
-        fetchWeather()
+    private fun openLocationChooser() {
+        findNavController().navigate(R.id.action_weather_to_locationChooser)
+    }
+
+    private fun openLocationChooserClosingWeatherFragment() {
+        findNavController().navigate(R.id.action_weather_to_locationChooser_closing_weather)
     }
 
     private fun fetchWeather() {

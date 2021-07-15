@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/fragmentWeather">
+
+    <fragment
+        android:id="@+id/fragmentWeather"
+        android:name="app.klimatic.ui.weather.presentation.WeatherFragment"
+        android:label="@string/label_fragment_weather"
+        tools:layout="@layout/fragment_weather">
+        <action
+            android:id="@+id/action_weather_to_locationChooser"
+            app:destination="@id/fragmentLocationChooser" />
+        <action
+            android:id="@+id/action_weather_to_locationChooser_closing_weather"
+            app:popUpTo="@id/fragmentWeather"
+            app:popUpToInclusive="true"
+            app:destination="@id/fragmentLocationChooser" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentLocationChooser"
+        android:name="app.klimatic.ui.locationchooser.presentation.LocationChooserFragment"
+        android:label="@string/label_fragment_location_chooser"
+        tools:layout="@layout/fragment_location_chooser" />
+
+</navigation>
