@@ -1,11 +1,18 @@
 package app.klimatic.ui.base
 
 import androidx.lifecycle.ViewModel
+import app.klimatic.data.pref.AppSharedPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
-open class BaseCoroutinesViewModel : ViewModel() {
+open class BaseCoroutinesViewModel(
+    private val appSharedPreferences: AppSharedPreferences
+) : ViewModel() {
+
+    companion object {
+        const val DEFAULT_QUERY = "auto:ip"
+    }
 
     /**
      * This is the job for all coroutines started by this ViewModel.
@@ -24,4 +31,10 @@ open class BaseCoroutinesViewModel : ViewModel() {
         viewModelJob.cancel()
         super.onCleared()
     }
+
+    fun getCurrentSelectedLocation(): String? =
+        appSharedPreferences.getCurrentSelectedLocation()
+
+    fun setCurrentSelectedLocation(location: String) =
+        appSharedPreferences.setCurrentSelectedLocation(location)
 }
