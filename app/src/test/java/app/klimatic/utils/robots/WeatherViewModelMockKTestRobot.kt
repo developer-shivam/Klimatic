@@ -1,6 +1,7 @@
 package app.klimatic.utils.robots
 
 import androidx.lifecycle.Observer
+import app.klimatic.data.pref.AppSharedPreferences
 import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.data.response.Response
 import app.klimatic.ui.utils.ViewState
@@ -15,6 +16,9 @@ class WeatherViewModelMockKTestRobot {
     lateinit var viewModel: WeatherViewModel
 
     @RelaxedMockK
+    lateinit var appSharedPreferences: AppSharedPreferences
+
+    @RelaxedMockK
     lateinit var dataManager: WeatherDataManager
 
     @RelaxedMockK
@@ -22,7 +26,7 @@ class WeatherViewModelMockKTestRobot {
 
     fun setUp() {
         MockKAnnotations.init(this)
-        viewModel = WeatherViewModel(repository = dataManager).apply {
+        viewModel = WeatherViewModel(appSharedPreferences, dataManager).apply {
             weather.observeForever(weatherObserver)
         }
     }

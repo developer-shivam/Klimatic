@@ -2,6 +2,7 @@ package app.klimatic.ui.weather.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import app.klimatic.data.pref.AppSharedPreferences
 import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.data.response.Response
 import app.klimatic.ui.weather.domain.WeatherDataManager
@@ -9,6 +10,7 @@ import app.klimatic.ui.utils.ViewState
 import app.klimatic.utils.TestCoroutineRule
 import app.klimatic.utils.factory.TestFactory.EMPTY_QUERY
 import app.klimatic.utils.factory.TestFactory.MOCKED_ERROR_CODE
+import app.klimatic.utils.factory.TestFactory.TEST_SAVED_LOCATION
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScope
@@ -35,6 +37,9 @@ class WeatherViewModelTest {
     private lateinit var dataManager: WeatherDataManager
 
     @Mock
+    private lateinit var appSharedPreferences: AppSharedPreferences
+
+    @Mock
     private lateinit var weatherObserver: Observer<ViewState<WeatherResponse>>
 
     @Mock
@@ -48,10 +53,12 @@ class WeatherViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = WeatherViewModel(dataManager).apply {
+        viewModel = WeatherViewModel(appSharedPreferences, dataManager).apply {
             weather.observeForever(weatherObserver)
             ioScope = testCoroutineScope
         }
+        whenever(appSharedPreferences.getCurrentSelectedLocation())
+            .thenReturn(TEST_SAVED_LOCATION)
     }
 
     @Test
