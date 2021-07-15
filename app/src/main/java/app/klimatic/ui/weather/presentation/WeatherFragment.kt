@@ -39,7 +39,13 @@ class WeatherFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        fetchWeather()
+        // On pressing back, if no location is selected, app will be closed.
+        // If user selects a location, HomeActivity is relaunched.
+        if (weatherViewModel.getCurrentSelectedLocation() == null) {
+            openLocationChooserClosingWeatherFragment()
+        } else {
+            fetchWeather()
+        }
     }
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +64,11 @@ class WeatherFragment : BaseFragment() {
     }
 
     private fun openLocationChooser() {
-        findNavController().navigate(R.id.action_fragmentWeather_to_fragmentLocationChooser)
+        findNavController().navigate(R.id.action_weather_to_locationChooser)
+    }
+
+    private fun openLocationChooserClosingWeatherFragment() {
+        findNavController().navigate(R.id.action_weather_to_locationChooser_closing_weather)
     }
 
     private fun fetchWeather() {
