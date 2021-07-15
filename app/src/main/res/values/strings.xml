@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Klimatic</string>
+
+    <!-- Navigation -->
+    <string name="label_fragment_weather">WeatherFragment</string>
+    <string name="label_fragment_location_chooser">LocationChooserFragment</string>
+
     <string name="error_code_generic">Something went wrong</string>
+
     <string name="wind_speed">Wind Speed</string>
     <string name="wind_direction">Wind Direction</string>
     <string name="humidity">Humidity</string>
@@ -10,6 +16,7 @@
     <string name="wind_kph">%.2f k/h</string>
     <string name="https_link">https:%s</string>
     <string name="today">TODAY</string>
+
     <string name="error_title">Sorry! We couldn\&apos;t fetch the weather forecast.</string>
     <string name="error_subtitle">Swipe down to try again</string>
 

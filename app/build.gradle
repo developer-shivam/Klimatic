@@ -79,6 +79,11 @@ dependencies {
     def liveDataKtxVersion = "2.4.0-alpha01"
     implementation  "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
 
+    /* Navigation */
+    def navigationLibraryVersion = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationLibraryVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationLibraryVersion"
+
     /* Lottie */
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"

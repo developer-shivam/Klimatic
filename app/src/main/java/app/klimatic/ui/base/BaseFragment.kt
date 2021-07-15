@@ -26,5 +26,6 @@ abstract class BaseFragment : Fragment() {
     @LayoutRes
     abstract fun getLayoutResource(): Int
 
-    abstract fun setupView(view: View, savedInstanceState: Bundle?)
+    open fun setupView(view: View, savedInstanceState: Bundle?) {
+    }
 }
