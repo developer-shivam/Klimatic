@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/text14"
+        android:layout_marginTop="@dimen/dimen8"
+        app:layout_goneMarginBottom="@dimen/dimen8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Azadpur" />
@@ -21,10 +23,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/subtitle_color"
-        android:textSize="@dimen/text12"
+        android:textSize="@dimen/text10"
         android:textStyle="italic"
+        android:layout_marginBottom="@dimen/dimen8"
+        app:layout_constraintBottom_toBottomOf="@id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLocationName"
         tools:text="Delhi, India" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha=".2"
+        android:background="@color/subtitle_color"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

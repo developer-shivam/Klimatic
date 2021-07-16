@@ -8,6 +8,8 @@ import app.klimatic.data.response.Response
 import app.klimatic.ui.base.BaseCurrentSelectedLocationViewModel
 import app.klimatic.ui.search.domain.SearchDataManager
 import app.klimatic.ui.utils.ViewState
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
@@ -18,22 +20,36 @@ class SearchViewModel(
     private val locationsLiveData: MutableLiveData<ViewState<List<Location>>> = MutableLiveData()
     val locations: LiveData<ViewState<List<Location>>> = locationsLiveData
 
+    var searchJob: Job? = null
+
     init {
         // fetch location initially with auto:ip
         searchLocation()
     }
 
     fun searchLocation(query: String = DEFAULT_QUERY) {
-        ioScope.launch {
-            val viewState: ViewState<List<Location>> =
-                when (val response =
-                    dataManager.searchLocation(query)) {
-                    is Response.Success -> {
-                        ViewState.Success(data = response.data)
-                    }
-                    is Response.Error -> ViewState.Error(code = response.errorCode)
-                }
-            locationsLiveData.postValue(viewState)
+        if (query == DEFAULT_QUERY) {
+            ioScope.launch {
+                fetchData(query)
+            }
+        } else {
+            searchJob?.cancel()
+            searchJob = ioScope.launch {
+                delay(300)
+                fetchData(query)
+            }
         }
+    }
+
+    private suspend fun fetchData(query: String) {
+        val viewState: ViewState<List<Location>> =
+            when (val response =
+                dataManager.searchLocation(query)) {
+                is Response.Success -> {
+                    ViewState.Success(data = response.data)
+                }
+                is Response.Error -> ViewState.Error(code = response.errorCode)
+            }
+        locationsLiveData.postValue(viewState)
     }
 }
