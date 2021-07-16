@@ -32,7 +32,7 @@ class LocationChooserFragment : BaseFragment() {
     }
 
     private fun setupLocationsRecyclerView() {
-        rvLocations?.apply {
+        rvLocations?.run {
             layoutManager =
                 LinearLayoutManager(context)
             adapter = locationAdapter

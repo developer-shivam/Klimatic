@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import app.klimatic.data.pref.AppSharedPreferences
 import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.data.response.Response
-import app.klimatic.ui.base.BaseCoroutinesViewModel
+import app.klimatic.ui.base.BaseCurrentSelectedLocationViewModel
 import app.klimatic.ui.utils.ViewState
 import app.klimatic.ui.weather.domain.WeatherDataManager
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class WeatherViewModel(
     appSharedPreferences: AppSharedPreferences,
     private val dataManager: WeatherDataManager
-) : BaseCoroutinesViewModel(
+) : BaseCurrentSelectedLocationViewModel(
     appSharedPreferences
 ) {
 

@@ -20,8 +20,8 @@ private fun provideAppDatabase(
         .build()
 }
 
-    fun provideWeatherDao(
-        appDatabase: AppDatabase
-    ): WeatherDao {
-        return appDatabase.weatherDao()
-    }
+fun provideWeatherDao(
+    appDatabase: AppDatabase
+): WeatherDao {
+    return appDatabase.weatherDao()
+}
