@@ -1,7 +1,9 @@
 package app.klimatic.ui.locationchooser.presentation
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
@@ -13,6 +15,7 @@ import app.klimatic.ui.home.HomeActivity
 import app.klimatic.ui.locationchooser.presentation.adapter.LocationAdapter
 import app.klimatic.ui.search.presentation.viewmodel.SearchViewModel
 import app.klimatic.ui.utils.handleState
+import kotlinx.android.synthetic.main.fragment_location_chooser.etSearchQuery
 import kotlinx.android.synthetic.main.fragment_location_chooser.rvLocations
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,6 +32,25 @@ class LocationChooserFragment : BaseFragment() {
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupLocationsRecyclerView()
         setupObservers()
+        setupSearch()
+    }
+
+    private fun setupSearch() {
+        etSearchQuery.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
+                if (!TextUtils.isEmpty(query)) {
+                    if (query!!.length > 2) {
+                        searchViewModel.searchLocation(query.toString())
+                    }
+                } else {
+                    searchViewModel.searchLocation()
+                }
+            }
+        })
     }
 
     private fun setupLocationsRecyclerView() {
