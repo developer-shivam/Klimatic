@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:background="@drawable/bg_green_bottom_curve_16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".18"
+        app:layout_constraintHeight_percent=".20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,9 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen8"
-        android:layout_marginBottom="@dimen/dimen8"
+        android:layout_marginBottom="@dimen/dimen16"
         android:text="@string/select_location"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="@dimen/text16"
         app:layout_constraintBottom_toTopOf="@id/etSearchQuery"
         app:layout_constraintEnd_toEndOf="parent"
