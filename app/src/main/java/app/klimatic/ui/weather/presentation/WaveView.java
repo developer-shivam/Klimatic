@@ -113,12 +113,12 @@ public class WaveView extends View {
         firstWaveColor = new Paint();
         firstWaveColor.setAntiAlias(true);
         firstWaveColor.setStrokeWidth(2);
-        firstWaveColor.setColor(context.getResources().getColor(R.color.wave1));
+        firstWaveColor.setColor(context.getResources().getColor(R.color.light_blue_700));
 
         secondWaveColor = new Paint();
         secondWaveColor.setAntiAlias(true);
         secondWaveColor.setStrokeWidth(2);
-        secondWaveColor.setColor(context.getResources().getColor(R.color.wave2));
+        secondWaveColor.setColor(context.getResources().getColor(R.color.light_blue_500));
 
         handler = new Handler(Looper.getMainLooper());
     }

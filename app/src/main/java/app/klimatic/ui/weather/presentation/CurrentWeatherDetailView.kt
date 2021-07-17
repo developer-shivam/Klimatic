@@ -36,6 +36,8 @@ class CurrentWeatherDetailView @JvmOverloads constructor(
         view.run {
             val location = currentWeatherResponse?.location
             tvLocation.text = location?.name
+            // Needed for marquee
+            tvLocation.isSelected = true
 
             if (!TextUtils.isEmpty(location?.region) && !TextUtils.isEmpty(location?.country)) {
                 tvLocationRegionCountry.text =

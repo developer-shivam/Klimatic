@@ -7,31 +7,43 @@
 
     <TextView
         android:id="@+id/tvLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen0"
+        android:layout_height="@dimen/dimen32"
         android:layout_marginTop="@dimen/dimen40"
+        android:background="@drawable/bg_text_location"
+        android:drawablePadding="@dimen/dimen8"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:gravity="center|end"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingStart="@dimen/dimen8"
+        android:paddingEnd="@dimen/dimen8"
+        android:singleLine="true"
         android:textColor="@color/white"
-        android:textSize="@dimen/text24"
-        app:layout_constraintVertical_bias="0"
-        android:textAlignment="viewEnd"
+        android:textSize="@dimen/text20"
+        android:maxWidth="@dimen/dimen220"
+        app:drawableEndCompat="@drawable/ic_baseline_mode_edit_24"
         app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemp"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
         tools:text="New Delhi" />
 
     <TextView
         android:id="@+id/tvLocationRegionCountry"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dimen0"
         android:layout_height="wrap_content"
+        android:textAlignment="viewEnd"
         android:textColor="@color/subtitle_color"
         android:textSize="@dimen/text16"
-        android:textAlignment="viewEnd"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemp"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLocation"
+        app:layout_constraintWidth_percent=".6"
         tools:text="New Delhi United States of America" />
 
     <TextView
@@ -40,10 +52,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen24"
         android:textColor="@color/white"
-        android:textSize="@dimen/text48"
+        android:textSize="@dimen/text44"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvCurrentWeatherCondition"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@id/guideStart"
         app:layout_constraintTop_toBottomOf="@id/tvLocationRegionCountry"
         tools:text="26 °C" />
 
@@ -55,8 +69,9 @@
         android:textAlignment="viewEnd"
         android:textColor="@color/white"
         android:textSize="@dimen/text16"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideEnd"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@id/guideStart"
         app:layout_constraintTop_toBottomOf="@+id/tvCurrentTemp"
         tools:text="Sunny" />
 
@@ -135,5 +150,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/dimen16" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
