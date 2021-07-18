@@ -1,5 +1,6 @@
 package app.klimatic.ui.weather.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -17,8 +18,10 @@ import app.klimatic.ui.weather.presentation.adapter.ForecastAdapter
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
 import kotlinx.android.synthetic.main.fragment_weather.errorView
+import kotlinx.android.synthetic.main.fragment_weather.ivSettings
 import kotlinx.android.synthetic.main.fragment_weather.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_weather.tvLastUpdated
 import kotlinx.android.synthetic.main.fragment_weather.tvToday
 import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.waveView
@@ -52,6 +55,10 @@ class WeatherFragment : BaseFragment() {
             fetchWeather(currentSelectedLocation)
         }
 
+        ivSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_weather_to_settings)
+        }
+
         weatherViewModel.fetchCurrentSelectedLocation()
     }
 
@@ -76,9 +83,11 @@ class WeatherFragment : BaseFragment() {
             layoutManager =
                 LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = foreCastAdapter
+            setHasFixedSize(true)
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupObservers() {
         weatherViewModel.run {
 
@@ -103,6 +112,8 @@ class WeatherFragment : BaseFragment() {
                             errorView.hide()
                             currentWeather.show()
                             currentWeather.setCurrentWeatherData(data)
+
+                            tvLastUpdated.text = "Last Updated\n ${data.current.lastUpdated}"
 
                             data.current.condition?.let {
                                 currentWeatherConditionLottieView.show()

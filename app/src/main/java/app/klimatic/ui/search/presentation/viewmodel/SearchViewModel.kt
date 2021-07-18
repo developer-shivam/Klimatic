@@ -28,16 +28,12 @@ class SearchViewModel(
     }
 
     fun searchLocation(query: String = DEFAULT_QUERY) {
-        if (query == DEFAULT_QUERY) {
-            ioScope.launch {
-                fetchData(query)
-            }
-        } else {
-            searchJob?.cancel()
-            searchJob = ioScope.launch {
+        searchJob?.cancel()
+        searchJob = ioScope.launch {
+            if (query != DEFAULT_QUERY) {
                 delay(300)
-                fetchData(query)
             }
+            fetchData(query)
         }
     }
 

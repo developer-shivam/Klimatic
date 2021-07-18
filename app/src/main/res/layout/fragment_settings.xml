@@ -6,59 +6,53 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/searchContainer"
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/bg_green_bottom_curve_16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".20"
+        app:layout_constraintHeight_percent=".15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvChooseLocation"
+        android:id="@+id/tvSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen16"
         android:layout_marginBottom="@dimen/dimen16"
-        android:text="@string/select_location"
+        android:text="@string/settings"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="@dimen/text16"
-        app:layout_constraintBottom_toTopOf="@id/etSearchQuery"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/etSearchQuery"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvSelectTheme"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen16"
-        android:layout_marginEnd="@dimen/dimen16"
-        android:background="@drawable/bg_grey_curve_8"
-        android:hint="@string/search"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="@dimen/dimen8"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black_99"
-        android:textSize="@dimen/text14"
-        app:layout_constraintBottom_toBottomOf="@id/searchContainer"
+        android:layout_marginTop="@dimen/dimen16"
+        android:text="@string/select_theme"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLocations"
+        android:id="@+id/rvTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen8"
+        android:clipToPadding="false"
         android:paddingStart="@dimen/dimen16"
         android:paddingEnd="@dimen/dimen16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchContainer"
+        app:layout_constraintTop_toBottomOf="@id/tvSelectTheme"
         tools:itemCount="4"
-        tools:listitem="@layout/layout_location_item" />
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/layout_theme_item"
+        tools:spanCount="5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

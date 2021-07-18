@@ -13,7 +13,20 @@
         <app.klimatic.ui.weather.presentation.WaveView
             android:id="@+id/waveView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:wave_color_one="?attr/colorPrimary"
+            app:wave_color_two="?attr/colorPrimaryVariant" />
+
+        <ImageView
+            android:id="@+id/ivSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen16"
+            android:contentDescription="@null"
+            android:padding="@dimen/dimen4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_settings_24" />
 
         <app.klimatic.ui.weather.presentation.CurrentWeatherDetailView
             android:id="@+id/currentWeather"
@@ -31,9 +44,9 @@
             android:layout_height="200dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".20"
+            app:layout_constraintVertical_bias=".25"
             tools:visibility="visible" />
 
         <include
@@ -42,12 +55,12 @@
             android:layout_width="@dimen/dimen0"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintWidth_percent="0.75"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias=".25"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintWidth_percent="0.75" />
 
         <TextView
             android:id="@+id/tvToday"
@@ -63,14 +76,27 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
 
+        <TextView
+            android:id="@+id/tvLastUpdated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text10"
+            android:textAlignment="viewEnd"
+            android:alpha=".5"
+            app:layout_constraintBottom_toTopOf="@+id/rvForeCast"
+            app:layout_goneMarginBottom="@dimen/dimen16"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvForeCast"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen32"
-            android:paddingEnd="@dimen/dimen16"
-            android:paddingStart="@dimen/dimen0"
+            android:layout_marginBottom="@dimen/dimen16"
             android:clipToPadding="false"
+            android:paddingStart="@dimen/dimen0"
+            android:paddingEnd="@dimen/dimen16"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
