@@ -2,14 +2,14 @@
 
 **Klimatic** is an android app built using **Kotlin**. It try to showcase all the latest technologies used in android.
 
-<a href="https://play.google.com/store/apps/details?id=app.klimatic"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px /></a>
-
 [![Test](https://github.com/developer-shivam/Klimatic/actions/workflows/test.yml/badge.svg)](https://github.com/developer-shivam/Klimatic/actions/workflows/test.yml)
 [![Build](https://github.com/developer-shivam/Klimatic/actions/workflows/build.yml/badge.svg)](https://github.com/developer-shivam/Klimatic/actions/workflows/build.yml)
 
 [![GitHub stars](https://img.shields.io/github/stars/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/issues)
 [![GitHub license](https://img.shields.io/github/license/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/blob/master/LICENSE)
+
+<a href="https://play.google.com/store/apps/details?id=app.klimatic"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px /></a>
 
 ![](media/feature_graphic_asset.png)
 
