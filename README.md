@@ -2,6 +2,8 @@
 
 **Klimatic** is an android app built using **Kotlin**. It try to showcase all the latest technologies used in android.
 
+<a href="https://play.google.com/store/apps/details?id=app.klimatic"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px /></a>
+
 [![Test](https://github.com/developer-shivam/Klimatic/actions/workflows/test.yml/badge.svg)](https://github.com/developer-shivam/Klimatic/actions/workflows/test.yml)
 [![Build](https://github.com/developer-shivam/Klimatic/actions/workflows/build.yml/badge.svg)](https://github.com/developer-shivam/Klimatic/actions/workflows/build.yml)
 
