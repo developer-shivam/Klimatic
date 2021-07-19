@@ -11,8 +11,16 @@
         android:label="@string/label_fragment_weather"
         tools:layout="@layout/fragment_weather">
         <action
-            android:id="@+id/action_fragmentWeather_to_fragmentLocationChooser"
+            android:id="@+id/action_weather_to_locationChooser"
             app:destination="@id/fragmentLocationChooser" />
+        <action
+            android:id="@+id/action_weather_to_settings"
+            app:destination="@id/fragmentSettings" />
+        <action
+            android:id="@+id/action_weather_to_locationChooser_closing_weather"
+            app:destination="@id/fragmentLocationChooser"
+            app:popUpTo="@id/fragmentWeather"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -20,5 +28,11 @@
         android:name="app.klimatic.ui.locationchooser.presentation.LocationChooserFragment"
         android:label="@string/label_fragment_location_chooser"
         tools:layout="@layout/fragment_location_chooser" />
+
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="app.klimatic.ui.settings.presentation.SettingsFragment"
+        android:label="@string/label_fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

@@ -94,31 +94,39 @@ public class WaveView extends View {
     private void init(Context context, AttributeSet attrs) {
 
         if (attrs != null) {
-            TypedArray attributes = getContext().obtainStyledAttributes(attrs, R.styleable.WaveView, 0, 0);
-            int height = attributes.getInt(R.styleable.WaveView_wave_height, 8);
-//            if (height > 10) {
-//                amplitude = 200;
-//            } else {
-//                amplitude = height * 10;
-//            }
-            float s = attributes.getFloat(R.styleable.WaveView_wave_speed, 0.5f);
-//            if (s > 10) {
-//                speed = (float) 0.25;
-//            } else {
-//                speed = s/8;
-//            }
+            TypedArray attributes = null;
+            try {
+                attributes = getContext().obtainStyledAttributes(
+                        attrs,
+                        R.styleable.WaveView,
+                        0,
+                        0
+                );
+                int colorOne = attributes.getInt(
+                        R.styleable.WaveView_wave_color_one,
+                        context.getResources().getColor(R.color.blue_500)
+                );
+                int colorTwo = attributes.getInt(
+                        R.styleable.WaveView_wave_color_two,
+                        context.getResources().getColor(R.color.blue_700)
+                );
+
+                mContext = context;
+                firstWaveColor = new Paint();
+                firstWaveColor.setAntiAlias(true);
+                firstWaveColor.setStrokeWidth(2);
+                firstWaveColor.setColor(colorTwo);
+
+                secondWaveColor = new Paint();
+                secondWaveColor.setAntiAlias(true);
+                secondWaveColor.setStrokeWidth(2);
+                secondWaveColor.setColor(colorOne);
+
+            } finally {
+                attributes.recycle();
+            }
         }
 
-        mContext = context;
-        firstWaveColor = new Paint();
-        firstWaveColor.setAntiAlias(true);
-        firstWaveColor.setStrokeWidth(2);
-        firstWaveColor.setColor(context.getResources().getColor(R.color.wave1));
-
-        secondWaveColor = new Paint();
-        secondWaveColor.setAntiAlias(true);
-        secondWaveColor.setStrokeWidth(2);
-        secondWaveColor.setColor(context.getResources().getColor(R.color.wave2));
 
         handler = new Handler(Looper.getMainLooper());
     }

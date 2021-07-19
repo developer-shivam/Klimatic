@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cvParent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/dimen16"
-    app:cardCornerRadius="@dimen/dimen8"
-    app:cardBackgroundColor="@color/white">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dimen12"
+    android:layout_marginTop="@dimen/dimen12"
+    android:layout_marginBottom="@dimen/dimen12">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dimen16">
-
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvParent"
+        android:layout_width="@dimen/dimen0"
+        android:layout_height="120dp"
+        android:layout_margin="@dimen/dimen4"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dimen8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="5:8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text12"
-        tools:text="10:00"/>
-
-    <ImageView
-        android:id="@+id/ivWeather"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dimen40"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTime"
-        android:layout_marginTop="@dimen/dimen8"
-        tools:srcCompat="@drawable/cloud"
-        />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/dimen8"
-        app:layout_constraintTop_toBottomOf="@+id/ivWeather"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text14"
-        tools:text="33 °C"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen16">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text12"
+                app:layout_constraintBottom_toTopOf="@id/ivWeather"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10:00" />
 
-</androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/ivWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen40"
+                android:layout_marginTop="@dimen/dimen8"
+                app:layout_constraintBottom_toTopOf="@id/tvTemp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTime"
+                tools:srcCompat="@drawable/cloud" />
+
+            <TextView
+                android:id="@+id/tvTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivWeather"
+                tools:text="33 °C" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

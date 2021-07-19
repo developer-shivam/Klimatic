@@ -3,6 +3,8 @@ package app.klimatic.data.model.weather
 import com.google.gson.annotations.SerializedName
 
 data class Location(
+    @SerializedName("id")
+    val id: Long?,
     @SerializedName("country")
     val country: String?,
     @SerializedName("lat")
@@ -18,5 +20,5 @@ data class Location(
     @SerializedName("region")
     val region: String?,
     @SerializedName("tz_id")
-    val tzId: String?
+    val timeZoneId: String?
 )

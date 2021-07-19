@@ -1,5 +1,6 @@
 package app.klimatic.ui.weather.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -17,8 +18,10 @@ import app.klimatic.ui.weather.presentation.adapter.ForecastAdapter
 import kotlinx.android.synthetic.main.fragment_weather.currentWeather
 import kotlinx.android.synthetic.main.fragment_weather.currentWeatherConditionLottieView
 import kotlinx.android.synthetic.main.fragment_weather.errorView
+import kotlinx.android.synthetic.main.fragment_weather.ivSettings
 import kotlinx.android.synthetic.main.fragment_weather.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_weather.tvLastUpdated
 import kotlinx.android.synthetic.main.fragment_weather.tvToday
 import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.waveView
@@ -34,13 +37,9 @@ class WeatherFragment : BaseFragment() {
         }
     }
 
+    private var currentSelectedLocation: String? = null
+
     override fun getLayoutResource(): Int = R.layout.fragment_weather
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        fetchWeather()
-    }
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
@@ -53,17 +52,30 @@ class WeatherFragment : BaseFragment() {
         }
 
         swipeRefreshLayout.setOnRefreshListener {
-            fetchWeather()
+            fetchWeather(currentSelectedLocation)
         }
+
+        ivSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_weather_to_settings)
+        }
+
+        weatherViewModel.fetchCurrentSelectedLocation()
     }
 
     private fun openLocationChooser() {
-        findNavController().navigate(R.id.action_fragmentWeather_to_fragmentLocationChooser)
+        findNavController().navigate(R.id.action_weather_to_locationChooser)
     }
 
-    private fun fetchWeather() {
-        weatherViewModel.fetchWeatherLocal()
-        weatherViewModel.fetchWeatherRemote()
+    private fun openLocationChooserClosingWeatherFragment() {
+        findNavController().navigate(R.id.action_weather_to_locationChooser_closing_weather)
+    }
+
+    private fun fetchWeather(query: String?) {
+        // btw, query will never be null
+        query?.let {
+            weatherViewModel.fetchWeatherLocal(query)
+            weatherViewModel.fetchWeatherRemote(query)
+        }
     }
 
     private fun setUpForeCastView(view: View) {
@@ -71,11 +83,27 @@ class WeatherFragment : BaseFragment() {
             layoutManager =
                 LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             adapter = foreCastAdapter
+            setHasFixedSize(true)
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setupObservers() {
         weatherViewModel.run {
+
+            currentSelectedLocation.observe(
+                this@WeatherFragment,
+                Observer { currentSelectedLocation ->
+                    // On pressing back, if no location is selected, app will be closed.
+                    // If user selects a location, HomeActivity is relaunched.
+                    if (currentSelectedLocation == null) {
+                        openLocationChooserClosingWeatherFragment()
+                    } else {
+                        this@WeatherFragment.currentSelectedLocation = currentSelectedLocation
+                        fetchWeather(currentSelectedLocation)
+                    }
+                })
+
             weather.observe(this@WeatherFragment, Observer { state ->
                 handleState(state,
                     { data ->
@@ -84,6 +112,8 @@ class WeatherFragment : BaseFragment() {
                             errorView.hide()
                             currentWeather.show()
                             currentWeather.setCurrentWeatherData(data)
+
+                            tvLastUpdated.text = "Last Updated\n ${data.current.lastUpdated}"
 
                             data.current.condition?.let {
                                 currentWeatherConditionLottieView.show()

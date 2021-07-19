@@ -4,6 +4,7 @@
     <!-- Navigation -->
     <string name="label_fragment_weather">WeatherFragment</string>
     <string name="label_fragment_location_chooser">LocationChooserFragment</string>
+    <string name="label_fragment_settings">SettingsFragment</string>
 
     <string name="error_code_generic">Something went wrong</string>
 
@@ -12,12 +13,17 @@
     <string name="humidity">Humidity</string>
     <string name="two_place_text" formatted="false">%s&#44; %s</string>
     <string name="wind_direction_value" formatted="false">%s° %s</string>
-    <string name="temp_c">"%.0f °C"</string>
+    <string name="temp_c">"%.0f°C"</string>
     <string name="wind_kph">%.2f k/h</string>
     <string name="https_link">https:%s</string>
     <string name="today">TODAY</string>
 
     <string name="error_title">Sorry! We couldn\&apos;t fetch the weather forecast.</string>
     <string name="error_subtitle">Swipe down to try again</string>
+
+    <string name="select_location">SELECT LOCATION</string>
+    <string name="search">Search</string>
+    <string name="settings">SETTINGS</string>
+    <string name="select_theme">Select Theme</string>
 
 </resources>

@@ -7,6 +7,10 @@ import kotlinx.coroutines.SupervisorJob
 
 open class BaseCoroutinesViewModel : ViewModel() {
 
+    companion object {
+        const val DEFAULT_QUERY = "auto:ip"
+    }
+
     /**
      * This is the job for all coroutines started by this ViewModel.
      * Cancelling this job will cancel all coroutines started by this ViewModel.

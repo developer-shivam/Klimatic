@@ -9,18 +9,33 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
 
+    private var rootView: View? = null
+
+    private var isViewReused: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(getLayoutResource(), container, false)
+        /**
+         * No need to re-create the view.
+         * Refer to https://twitter.com/ianhlake/status/1103522856535638016
+         * */
+        if (rootView == null) {
+            rootView = inflater.inflate(getLayoutResource(), container, false)
+        } else {
+            isViewReused = true
+        }
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView(view, savedInstanceState)
+        if (!isViewReused) {
+            setupView(view, savedInstanceState)
+        }
     }
 
     @LayoutRes
