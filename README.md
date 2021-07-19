@@ -9,7 +9,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/issues)
 [![GitHub license](https://img.shields.io/github/license/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/blob/master/LICENSE)
 
-![](media/feature_graphic.png)
+![](media/feature_graphic_asset.png)
 
 ## Built using
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
