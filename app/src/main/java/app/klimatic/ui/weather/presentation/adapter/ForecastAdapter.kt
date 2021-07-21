@@ -6,29 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
 import app.klimatic.data.model.weather.Forecast
 import app.klimatic.ui.utils.getHours
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.layout_forecast_item.view.cvParent
 import kotlinx.android.synthetic.main.layout_forecast_item.view.ivWeather
 import kotlinx.android.synthetic.main.layout_forecast_item.view.tvTemp
 import kotlinx.android.synthetic.main.layout_forecast_item.view.tvTime
 
 class ForecastAdapter(private val context: Context) :
-    RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
-
-    private val dataList: ArrayList<Forecast.ForecastHour> = arrayListOf()
-
-    fun updateForeCastData(updatedList: List<Forecast.ForecastHour>?) {
-        updatedList?.let {
-            dataList.clear()
-            dataList.addAll(it)
-            notifyDataSetChanged()
-        }
-    }
+    ListAdapter<Forecast.ForecastHour, ForecastAdapter.ViewHolder>(ForecastDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -37,7 +27,7 @@ class ForecastAdapter(private val context: Context) :
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val dataItem = dataList[position]
+        val dataItem = getItem(position)
         holder.run {
             tvTemp.text = context.getString(R.string.temp_c, dataItem.tempC)
             tvTime.text = dataItem.time.getHours()
@@ -47,10 +37,23 @@ class ForecastAdapter(private val context: Context) :
         }
     }
 
-    override fun getItemCount() = dataList.size
+    private class ForecastDiffCallback : DiffUtil.ItemCallback<Forecast.ForecastHour>() {
+        override fun areItemsTheSame(
+            oldItem: Forecast.ForecastHour,
+            newItem: Forecast.ForecastHour
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(
+            oldItem: Forecast.ForecastHour,
+            newItem: Forecast.ForecastHour
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cvParent: CardView = itemView.cvParent
         val tvTime: TextView = itemView.tvTime
         val ivWeather: ImageView = itemView.ivWeather
         val tvTemp: TextView = itemView.tvTemp

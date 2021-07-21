@@ -122,10 +122,7 @@ class WeatherFragment : BaseFragment() {
                                     data.current.condition
                                 )
                             }
-
-                            foreCastAdapter?.updateForeCastData(
-                                updatedList = data.forecast?.forecastDay?.get(0)?.hour
-                            )
+                            foreCastAdapter?.submitList(data.forecast?.forecastDay?.get(0)?.hour)
                             showForeCastView()
                         } else {
                             errorView.show()
