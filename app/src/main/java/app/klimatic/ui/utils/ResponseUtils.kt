@@ -39,13 +39,11 @@ fun <T> handleState(
     state: ViewState<T>,
     success: (data: T) -> Unit,
     error: (errorCode: Int?) -> Unit,
-    showLoading: () -> Unit,
-    hideLoading: () -> Unit
+    showLoading: () -> Unit
 ) {
     when (state) {
         is ViewState.Success -> success(state.data)
         is ViewState.Error -> error(state.code)
-        is ViewState.ShowLoading -> showLoading()
-        is ViewState.HideLoading -> hideLoading()
+        is ViewState.Loading -> showLoading()
     }
 }
