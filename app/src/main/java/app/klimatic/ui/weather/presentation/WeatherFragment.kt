@@ -135,7 +135,7 @@ class WeatherFragment : BaseFragment() {
                         errorView.show()
                     }, {
                         swipeRefreshLayout.isRefreshing = true
-                    }, {})
+                    })
             })
         }
     }

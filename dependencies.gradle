@@ -1,0 +1,79 @@
+ext {
+
+    // Kotlin
+    kotlinVersion = '1.3.72'
+
+    // Android
+    coreKtxLibraryVersion = '1.5.0'
+    constraintLayoutLibraryVersion = '2.0.4'
+    appCompatLibraryVersion = '1.3.0'
+    swipeRefreshLibraryVersion = '1.1.0'
+    recyclerViewLibraryVersion = '1.2.1'
+    materialLibraryVersion = '1.4.0'
+    lifeCycleVersion = '2.2.0'
+    viewModelVersion = '2.3.1'
+    liveDataKtxVersion = '2.4.0-alpha01'
+    navigationLibraryVersion = '2.3.5'
+    multidexVersion = '1.0.3'
+    roomVersion = '2.3.0'
+    firebaseBomVersion = '28.1.0'
+    gmsPlayServices = '18.0.0'
+
+    lottieVersion = '3.4.0'
+    koin = '2.0.1'
+    retrofitVersion = '2.9.0'
+    loggingInterceptorVersion = '4.9.1'
+    glideVersion = '4.11.0'
+
+    junitVersion = '4.13.2'
+    mockitoCoreVersion = '3.3.3'
+    mockitoInlineVersion = '2.27.0'
+    coroutinesTestVersion = '1.4.3'
+    mockWebServerVersion = '4.9.0'
+    coreTestingVersion = '2.1.0'
+
+    appDependencies = [
+            kotlin:                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+            coreKtx:               "androidx.core:core-ktx:$coreKtxLibraryVersion",
+            constraintLayout:      "androidx.constraintlayout:constraintlayout:$constraintLayoutLibraryVersion",
+            appCompat:             "androidx.appcompat:appcompat:$appCompatLibraryVersion",
+            swipeRefreshLayout:    "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLibraryVersion",
+            recyclerView:          "androidx.recyclerview:recyclerview:$recyclerViewLibraryVersion",
+            material:              "com.google.android.material:material:$materialLibraryVersion",
+            lifeCycle:             "androidx.lifecycle:lifecycle-extensions:$lifeCycleVersion",
+            viewModel:             "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelVersion",
+            liveData:              "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion",
+            navigationFragment:    "androidx.navigation:navigation-fragment-ktx:$navigationLibraryVersion",
+            navigationUi:          "androidx.navigation:navigation-ui-ktx:$navigationLibraryVersion",
+            lottie:                "com.airbnb.android:lottie:$lottieVersion",
+            multidex:              "com.android.support:multidex:$multidexVersion",
+            glide:                 "com.github.bumptech.glide:glide:$glideVersion",
+            glideCompiler:         "com.github.bumptech.glide:compiler:$glideVersion",
+            koin:                  "org.koin:koin-android:$koin",
+            koinViewModel:         "org.koin:koin-androidx-viewmodel:$koin",
+            koinScope:             "org.koin:koin-androidx-scope:$koin",
+            retrofit:              "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitGsonConverter: "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            loggingInterceptor:    "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
+            room:                  "androidx.room:room-runtime:$roomVersion",
+            roomCompiler:          "androidx.room:room-compiler:$roomVersion",
+            firebase:              "com.google.firebase:firebase-bom:$firebaseBomVersion",
+            firebaseCrashlytics:   "com.google.firebase:firebase-crashlytics-ktx",
+            firebaseAnalytics:     "com.google.firebase:firebase-analytics-ktx",
+            gmsPlayServices:       "com.google.android.gms:play-services-location:$gmsPlayServices"
+    ]
+
+    appTestDependencies = [
+            junit:                 "junit:junit:$junitVersion",
+            mockitoCore:           "org.mockito:mockito-core:$mockitoCoreVersion",
+            mockitoInline:         "org.mockito:mockito-inline:$mockitoInlineVersion",
+            coroutinesTest:        "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion",
+            coreTesting:           "androidx.arch.core:core-testing:$coreTestingVersion",
+            mockWebServer:         "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
+    ]
+
+    domainDependencies = [
+            kotlin:                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
+    ]
+
+}

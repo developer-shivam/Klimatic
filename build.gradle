@@ -29,5 +29,6 @@ allprojects {
     }
 }
 
+apply from: "dependencies.gradle"
 apply plugin: "com.diffplug.spotless"
 apply from: "$project.rootDir/spotless.gradle"
