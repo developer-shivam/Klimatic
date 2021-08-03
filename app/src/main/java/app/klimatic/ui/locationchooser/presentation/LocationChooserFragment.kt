@@ -1,11 +1,16 @@
 package app.klimatic.ui.locationchooser.presentation
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Looper
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.klimatic.R
@@ -15,13 +20,42 @@ import app.klimatic.ui.home.HomeActivity
 import app.klimatic.ui.locationchooser.presentation.adapter.LocationAdapter
 import app.klimatic.ui.search.presentation.viewmodel.SearchViewModel
 import app.klimatic.ui.utils.handleState
+import app.klimatic.ui.utils.hasPermissions
+import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.fragment_location_chooser.etSearchQuery
 import kotlinx.android.synthetic.main.fragment_location_chooser.rvLocations
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LocationChooserFragment : BaseFragment() {
+
+class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     private val searchViewModel by viewModel<SearchViewModel>()
+
+    private var fusedLocationClient: FusedLocationProviderClient? = null
+
+    private val locationCallback by lazy {
+        object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                locationResult.lastLocation.run {
+                    searchViewModel.searchLocationByLatLon(latitude, longitude)
+                }
+                stopLocationService()
+            }
+        }
+    }
+
+    private val permissions = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            val acceptedPermissions = map.values.filter { it == true }
+            if (acceptedPermissions.size == permissions.size) {
+                fetchLocation()
+            }
+        }
 
     override fun getLayoutResource(): Int = R.layout.fragment_location_chooser
 
@@ -30,24 +64,55 @@ class LocationChooserFragment : BaseFragment() {
     }
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
+        requestPermissions()
         setupLocationsRecyclerView()
         setupObservers()
         setupSearch()
+    }
+
+    private fun fetchLocation() {
+        context?.let {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(it)
+        }
+        startLocationService()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun startLocationService() {
+        fusedLocationClient?.requestLocationUpdates(
+            getLocationRequest(),
+            locationCallback,
+            Looper.getMainLooper()
+        )
+    }
+
+    private fun stopLocationService() {
+        fusedLocationClient?.removeLocationUpdates(locationCallback)
+    }
+
+    private fun getLocationRequest(): LocationRequest {
+        return LocationRequest.create().apply {
+            interval = 60000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
     }
 
     private fun setupSearch() {
         etSearchQuery.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(query: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!TextUtils.isEmpty(query)) {
                     if (query!!.length > 2) {
-                        searchViewModel.searchLocation(query.toString())
+                        searchViewModel.searchLocationByQuery(query.toString())
                     }
                 } else {
-                    searchViewModel.searchLocation()
+                    searchViewModel.searchLocationByQuery()
                 }
             }
         })
@@ -75,10 +140,22 @@ class LocationChooserFragment : BaseFragment() {
         })
     }
 
+    private fun requestPermissions() {
+        if (context.hasPermissions(permissions))
+            fetchLocation()
+        else
+            requestPermissionLauncher.launch(permissions)
+    }
+
     var onItemClickAction: (location: Location) -> Unit = { location ->
         if (!TextUtils.isEmpty(location.name)) {
             searchViewModel.setCurrentSelectedLocation(location.name!!)
         }
         HomeActivity.launchSingleTask(requireContext())
+    }
+
+    override fun onStop() {
+        stopLocationService()
+        super.onStop()
     }
 }

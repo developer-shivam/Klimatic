@@ -20,14 +20,22 @@ class SearchViewModel(
     private val locationsLiveData: MutableLiveData<ViewState<List<Location>>> = MutableLiveData()
     val locations: LiveData<ViewState<List<Location>>> = locationsLiveData
 
-    var searchJob: Job? = null
+    private var searchJob: Job? = null
 
     init {
         // fetch location initially with auto:ip
-        searchLocation()
+        searchLocationByQuery()
     }
 
-    fun searchLocation(query: String = DEFAULT_QUERY) {
+    fun searchLocationByLatLon(lat: Double, long: Double) {
+        searchLocation(query = "$lat,$long")
+    }
+
+    fun searchLocationByQuery(query: String = DEFAULT_QUERY) {
+        searchLocation(query = query)
+    }
+
+    private fun searchLocation(query: String) {
         searchJob?.cancel()
         searchJob = ioScope.launch {
             if (query != DEFAULT_QUERY) {
@@ -48,4 +56,5 @@ class SearchViewModel(
             }
         locationsLiveData.postValue(viewState)
     }
+
 }
