@@ -64,6 +64,8 @@ dependencies {
     implementation appDependencies.swipeRefreshLayout
     implementation appDependencies.recyclerView
 
+    implementation appDependencies.gmsPlayServices
+
     implementation appDependencies.material
 
     implementation appDependencies.lifeCycle

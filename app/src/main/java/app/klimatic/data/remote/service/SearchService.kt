@@ -8,6 +8,6 @@ interface SearchService {
 
     @GET("/v1/search.json")
     suspend fun searchLocation(
-        @Query("q") query: String?
+        @Query("q") query: String
     ): List<Location>
 }

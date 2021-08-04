@@ -17,6 +17,7 @@ ext {
     multidexVersion = '1.0.3'
     roomVersion = '2.3.0'
     firebaseBomVersion = '28.1.0'
+    gmsPlayServices = '18.0.0'
 
     lottieVersion = '3.4.0'
     koin = '2.0.1'
@@ -59,6 +60,7 @@ ext {
             firebase:              "com.google.firebase:firebase-bom:$firebaseBomVersion",
             firebaseCrashlytics:   "com.google.firebase:firebase-crashlytics-ktx",
             firebaseAnalytics:     "com.google.firebase:firebase-analytics-ktx",
+            gmsPlayServices:       "com.google.android.gms:play-services-location:$gmsPlayServices"
     ]
 
     appTestDependencies = [
