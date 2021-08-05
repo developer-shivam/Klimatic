@@ -21,11 +21,14 @@ import app.klimatic.ui.locationchooser.presentation.adapter.LocationAdapter
 import app.klimatic.ui.search.presentation.viewmodel.SearchViewModel
 import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hasPermissions
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.fragment_location_chooser.etSearchQuery
 import kotlinx.android.synthetic.main.fragment_location_chooser.rvLocations
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 

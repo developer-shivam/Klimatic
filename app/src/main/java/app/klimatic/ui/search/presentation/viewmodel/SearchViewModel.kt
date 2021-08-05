@@ -56,5 +56,4 @@ class SearchViewModel(
             }
         locationsLiveData.postValue(viewState)
     }
-
 }
