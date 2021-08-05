@@ -9,7 +9,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/issues)
 [![GitHub license](https://img.shields.io/github/license/developer-shivam/Klimatic)](https://github.com/developer-shivam/Klimatic/blob/master/LICENSE)
 
-![](media/feature_graphic.png)
+<a href="https://play.google.com/store/apps/details?id=app.klimatic"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px /></a>
+
+![](media/feature_graphic_asset.png)
 
 ## Built using
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) - Collection of libraries that help you design robust, testable, and maintainable apps.
