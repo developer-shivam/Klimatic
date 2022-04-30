@@ -23,7 +23,11 @@ val networkModule = module {
 
 private fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BASIC
+        if (BuildConfig.DEBUG) {
+            level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            level = HttpLoggingInterceptor.Level.NONE
+        }
     }
 }
 

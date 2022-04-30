@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
 import app.klimatic.data.model.weather.Current.Companion.DAY
 import app.klimatic.ui.base.BaseFragment
+import app.klimatic.ui.locationchooser.presentation.LocationViewModel
 import app.klimatic.ui.utils.getCurrentHours
 import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hide
@@ -25,11 +26,14 @@ import kotlinx.android.synthetic.main.fragment_weather.tvLastUpdated
 import kotlinx.android.synthetic.main.fragment_weather.tvToday
 import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.waveView
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeatherFragment : BaseFragment() {
 
     private val weatherViewModel by viewModel<WeatherViewModel>()
+
+    private val locationViewModel by sharedViewModel<LocationViewModel>()
 
     private val foreCastAdapter by lazy {
         context?.let {
@@ -59,7 +63,7 @@ class WeatherFragment : BaseFragment() {
             findNavController().navigate(R.id.action_weather_to_settings)
         }
 
-        weatherViewModel.fetchCurrentSelectedLocation()
+        locationViewModel.fetchCurrentSelectedLocation()
     }
 
     private fun openLocationChooser() {
@@ -89,11 +93,9 @@ class WeatherFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setupObservers() {
-        weatherViewModel.run {
-
+        locationViewModel.run {
             currentSelectedLocation.observe(
-                this@WeatherFragment,
-                Observer { currentSelectedLocation ->
+                this@WeatherFragment, Observer { currentSelectedLocation ->
                     // On pressing back, if no location is selected, app will be closed.
                     // If user selects a location, HomeActivity is relaunched.
                     if (currentSelectedLocation == null) {
@@ -102,8 +104,10 @@ class WeatherFragment : BaseFragment() {
                         this@WeatherFragment.currentSelectedLocation = currentSelectedLocation
                         fetchWeather(currentSelectedLocation)
                     }
-                })
-
+                }
+            )
+        }
+        weatherViewModel.run {
             weather.observe(this@WeatherFragment, Observer { state ->
                 handleState(state,
                     { data ->

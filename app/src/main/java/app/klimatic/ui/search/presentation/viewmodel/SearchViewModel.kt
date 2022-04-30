@@ -2,11 +2,10 @@ package app.klimatic.ui.search.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.klimatic.data.model.weather.Location
-import app.klimatic.data.pref.AppSharedPreferences
 import app.klimatic.data.response.Response
-import app.klimatic.ui.base.BaseCurrentSelectedLocationViewModel
 import app.klimatic.ui.search.domain.SearchDataManager
 import app.klimatic.ui.utils.Constants.DEFAULT_QUERY
 import app.klimatic.ui.utils.ViewState
@@ -15,9 +14,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    appSharedPreferences: AppSharedPreferences,
     private val dataManager: SearchDataManager
-) : BaseCurrentSelectedLocationViewModel(appSharedPreferences) {
+) : ViewModel() {
 
     private val locationsLiveData: MutableLiveData<ViewState<List<Location>>> = MutableLiveData()
     val locations: LiveData<ViewState<List<Location>>> = locationsLiveData
