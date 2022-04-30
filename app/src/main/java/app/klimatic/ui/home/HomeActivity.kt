@@ -5,8 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import app.klimatic.R
 import app.klimatic.ui.base.BaseActivity
+import app.klimatic.ui.locationchooser.presentation.LocationViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : BaseActivity() {
+
+    // Shared object between all fragment
+    private val locationViewModel by viewModel<LocationViewModel>()
 
     companion object {
         fun launchSingleTask(context: Context) {

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.klimatic.R
 import app.klimatic.data.model.weather.Location
 import app.klimatic.ui.base.BaseFragment
-import app.klimatic.ui.home.HomeActivity
 import app.klimatic.ui.locationchooser.presentation.adapter.LocationAdapter
 import app.klimatic.ui.search.presentation.viewmodel.SearchViewModel
 import app.klimatic.ui.utils.handleState
@@ -28,11 +27,14 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.fragment_location_chooser.etSearchQuery
 import kotlinx.android.synthetic.main.fragment_location_chooser.rvLocations
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     private val searchViewModel by viewModel<SearchViewModel>()
+
+    private val locationViewModel by sharedViewModel<LocationViewModel>()
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
 
@@ -130,7 +132,7 @@ class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissi
     }
 
     private fun setupObservers() {
-        searchViewModel.locations.observe(this, Observer { state ->
+        searchViewModel.locations.observe(viewLifecycleOwner, Observer { state ->
             handleState(
                 state,
                 {
@@ -150,11 +152,11 @@ class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissi
             requestPermissionLauncher.launch(permissions)
     }
 
-    var onItemClickAction: (location: Location) -> Unit = { location ->
+    private var onItemClickAction: (location: Location) -> Unit = { location ->
         if (!TextUtils.isEmpty(location.name)) {
-            searchViewModel.setCurrentSelectedLocation(location.name!!)
+            locationViewModel.setCurrentSelectedLocation(location.name!!)
         }
-        HomeActivity.launchSingleTask(requireContext())
+        activity?.onBackPressed()
     }
 
     override fun onStop() {

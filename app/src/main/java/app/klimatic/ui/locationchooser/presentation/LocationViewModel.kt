@@ -1,11 +1,11 @@
-package app.klimatic.ui.base
+package app.klimatic.ui.locationchooser.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.klimatic.data.pref.AppSharedPreferences
 
-open class BaseCurrentSelectedLocationViewModel(
+class LocationViewModel(
     private val appSharedPreferences: AppSharedPreferences
 ) : ViewModel() {
 
@@ -13,12 +13,14 @@ open class BaseCurrentSelectedLocationViewModel(
     val currentSelectedLocation: LiveData<String?> = currentSelectedLocationLiveData
 
     fun fetchCurrentSelectedLocation() {
-        currentSelectedLocationLiveData.postValue(getCurrentSelectedLocation())
+        currentSelectedLocationLiveData.value = getCurrentSelectedLocation()
     }
 
     private fun getCurrentSelectedLocation(): String? =
         appSharedPreferences.getCurrentSelectedLocation()
 
-    fun setCurrentSelectedLocation(location: String) =
+    fun setCurrentSelectedLocation(location: String) {
         appSharedPreferences.setCurrentSelectedLocation(location)
+        currentSelectedLocationLiveData.value = getCurrentSelectedLocation()
+    }
 }
