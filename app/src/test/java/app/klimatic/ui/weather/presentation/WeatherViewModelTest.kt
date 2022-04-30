@@ -48,7 +48,7 @@ class WeatherViewModelTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        viewModel = WeatherViewModel(appSharedPreferences, dataManager).apply {
+        viewModel = WeatherViewModel(dataManager).apply {
             weather.observeForever(weatherObserver)
         }
         whenever(appSharedPreferences.getCurrentSelectedLocation())
