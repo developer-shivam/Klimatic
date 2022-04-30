@@ -2,11 +2,13 @@ package app.klimatic.ui.search.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import app.klimatic.data.model.weather.Location
 import app.klimatic.data.pref.AppSharedPreferences
 import app.klimatic.data.response.Response
 import app.klimatic.ui.base.BaseCurrentSelectedLocationViewModel
 import app.klimatic.ui.search.domain.SearchDataManager
+import app.klimatic.ui.utils.Constants.DEFAULT_QUERY
 import app.klimatic.ui.utils.ViewState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -37,7 +39,7 @@ class SearchViewModel(
 
     private fun searchLocation(query: String) {
         searchJob?.cancel()
-        searchJob = ioScope.launch {
+        searchJob = viewModelScope.launch {
             if (query != DEFAULT_QUERY) {
                 delay(300)
             }

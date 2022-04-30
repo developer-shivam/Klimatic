@@ -2,6 +2,7 @@ package app.klimatic.ui.weather.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import app.klimatic.data.pref.AppSharedPreferences
 import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.data.response.Response
@@ -21,7 +22,7 @@ class WeatherViewModel(
     val weather: LiveData<ViewState<WeatherResponse>> = weatherLiveData
 
     fun fetchWeatherLocal(query: String) {
-        ioScope.launch {
+        viewModelScope.launch {
             val entity = dataManager.fetchWeatherLocal(query)
             if (entity != null) {
                 weatherLiveData.postValue(ViewState.Success(entity.data))
@@ -30,7 +31,7 @@ class WeatherViewModel(
     }
 
     fun fetchWeatherRemote(query: String) {
-        ioScope.launch {
+        viewModelScope.launch {
             val viewState: ViewState<WeatherResponse> =
                 when (val response =
                     dataManager.fetchWeatherRemote(query)) {

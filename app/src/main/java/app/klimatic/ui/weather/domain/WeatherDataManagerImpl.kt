@@ -5,26 +5,30 @@ import app.klimatic.data.model.local.entity.Weather
 import app.klimatic.data.remote.service.WeatherService
 import app.klimatic.data.remote.weather.WeatherResponse
 import app.klimatic.ui.utils.getResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class WeatherDataManagerImpl(
     private val weatherDao: WeatherDao,
     private val weatherService: WeatherService
 ) : WeatherDataManager {
 
-    override suspend fun fetchWeatherLocal(query: String): Weather? {
-        return weatherDao.fetchWeather(query)
+    override suspend fun fetchWeatherLocal(query: String): Weather? = withContext(Dispatchers.IO) {
+        weatherDao.fetchWeather(query)
     }
 
     override suspend fun saveWeather(
         query: String,
         data: WeatherResponse
-    ) {
+    ) = withContext(Dispatchers.IO) {
         weatherDao.saveWeather(
             Weather(query, data)
         )
     }
 
     override suspend fun fetchWeatherRemote(query: String?) = getResponse {
-        weatherService.fetchWeather(query)
+        withContext(Dispatchers.IO) {
+            weatherService.fetchWeather(query)
+        }
     }
 }
