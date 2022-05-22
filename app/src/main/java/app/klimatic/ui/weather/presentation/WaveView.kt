@@ -6,13 +6,13 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.os.Handler
-import app.klimatic.R
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import app.klimatic.R
 
 /**
  * This is library implementation of Wave View
