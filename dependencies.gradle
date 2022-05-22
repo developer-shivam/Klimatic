@@ -72,7 +72,7 @@ ext {
             mockWebServer:         "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
     ]
 
-    domainDependencies = [
+    coreDependencies = [
             kotlin:                "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
     ]
 
