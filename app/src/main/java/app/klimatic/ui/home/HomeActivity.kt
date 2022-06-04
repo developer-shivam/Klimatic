@@ -3,15 +3,14 @@ package app.klimatic.ui.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import app.klimatic.R
 import app.klimatic.ui.base.BaseActivity
-import app.klimatic.ui.locationchooser.presentation.LocationViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlinx.android.synthetic.main.activity_home.bottom_navigation_view
 
 class HomeActivity : BaseActivity() {
-
-    // Shared object between all fragment
-    private val locationViewModel by viewModel<LocationViewModel>()
 
     companion object {
         fun launchSingleTask(context: Context) {
@@ -24,5 +23,16 @@ class HomeActivity : BaseActivity() {
     override fun getLayoutResource(): Int = R.layout.activity_home
 
     override fun setupView(savedInstanceState: Bundle?) {
+        bottom_navigation_view.setupWithNavController(navigationController())
+        // Turn off reselection
+        bottom_navigation_view.setOnItemReselectedListener {
+            // no-op
+        }
+    }
+
+    private fun navigationController(): NavController {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        return navHostFragment.navController
     }
 }

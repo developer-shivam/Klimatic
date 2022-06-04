@@ -18,12 +18,19 @@
 
         <activity
             android:name=".ui.home.HomeActivity"
-            android:windowSoftInputMode="adjustNothing">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.locationchooser.presentation.LocationChooserActivity"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name=".ui.settings.presentation.SettingsActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragmentWeather"
+        android:enabled="true"
+        android:icon="@drawable/ic_sunny_24"
+        android:title="@string/current"/>
+    <item
+        android:id="@+id/fragmentNews"
+        android:enabled="true"
+        android:icon="@drawable/ic_news_24"
+        android:title="@string/news"/>
+</menu>

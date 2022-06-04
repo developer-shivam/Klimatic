@@ -1,16 +1,20 @@
 package app.klimatic.ui.weather.presentation
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.klimatic.R
 import app.klimatic.data.model.weather.Current.Companion.DAY
 import app.klimatic.ui.base.BaseFragment
+import app.klimatic.ui.locationchooser.presentation.LocationChooserActivity
 import app.klimatic.ui.locationchooser.presentation.LocationViewModel
+import app.klimatic.ui.settings.presentation.SettingsActivity
 import app.klimatic.ui.utils.getCurrentHours
 import app.klimatic.ui.utils.handleState
 import app.klimatic.ui.utils.hide
@@ -26,14 +30,13 @@ import kotlinx.android.synthetic.main.fragment_weather.tvLastUpdated
 import kotlinx.android.synthetic.main.fragment_weather.tvToday
 import kotlinx.android.synthetic.main.fragment_weather.view.rvForeCast
 import kotlinx.android.synthetic.main.fragment_weather.waveView
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeatherFragment : BaseFragment() {
 
     private val weatherViewModel by viewModel<WeatherViewModel>()
 
-    private val locationViewModel by sharedViewModel<LocationViewModel>()
+    private val locationViewModel by viewModel<LocationViewModel>()
 
     private val foreCastAdapter by lazy {
         context?.let {
@@ -43,11 +46,23 @@ class WeatherFragment : BaseFragment() {
 
     private var currentSelectedLocation: String? = null
 
+    private var startLocationChooserForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result != null && result.resultCode == Activity.RESULT_OK) {
+            locationViewModel.fetchCurrentSelectedLocation()
+        } else if (result != null && result.resultCode == Activity.RESULT_CANCELED) {
+            if (currentSelectedLocation == null) {
+                requireActivity().finish()
+            }
+        }
+    }
+
     override fun getLayoutResource(): Int = R.layout.fragment_weather
 
     override fun setupView(view: View, savedInstanceState: Bundle?) {
         setupObservers()
-        setUpForeCastView(view)
+        setupForeCastView(view)
 
         waveView.setLifecycle(lifecycle)
 
@@ -60,18 +75,18 @@ class WeatherFragment : BaseFragment() {
         }
 
         ivSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_weather_to_settings)
+            Intent(requireActivity(), SettingsActivity::class.java).also {
+                startActivity(it)
+            }
         }
 
         locationViewModel.fetchCurrentSelectedLocation()
     }
 
     private fun openLocationChooser() {
-        findNavController().navigate(R.id.action_weather_to_locationChooser)
-    }
-
-    private fun openLocationChooserClosingWeatherFragment() {
-        findNavController().navigate(R.id.action_weather_to_locationChooser_closing_weather)
+        Intent(requireActivity(), LocationChooserActivity::class.java).also {
+            startLocationChooserForResult.launch(it)
+        }
     }
 
     private fun fetchWeather(query: String?) {
@@ -82,7 +97,7 @@ class WeatherFragment : BaseFragment() {
         }
     }
 
-    private fun setUpForeCastView(view: View) {
+    private fun setupForeCastView(view: View) {
         view.rvForeCast.run {
             layoutManager =
                 LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
@@ -99,7 +114,7 @@ class WeatherFragment : BaseFragment() {
                     // On pressing back, if no location is selected, app will be closed.
                     // If user selects a location, HomeActivity is relaunched.
                     if (currentSelectedLocation == null) {
-                        openLocationChooserClosingWeatherFragment()
+                        openLocationChooser()
                     } else {
                         this@WeatherFragment.currentSelectedLocation = currentSelectedLocation
                         fetchWeather(currentSelectedLocation)

@@ -2,6 +2,7 @@ package app.klimatic.ui.locationchooser.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.os.Looper
 import android.text.Editable
@@ -27,14 +28,13 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.fragment_location_chooser.etSearchQuery
 import kotlinx.android.synthetic.main.fragment_location_chooser.rvLocations
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     private val searchViewModel by viewModel<SearchViewModel>()
 
-    private val locationViewModel by sharedViewModel<LocationViewModel>()
+    private val locationViewModel by viewModel<LocationViewModel>()
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
 
@@ -155,8 +155,9 @@ class LocationChooserFragment : BaseFragment(), ActivityCompat.OnRequestPermissi
     private var onItemClickAction: (location: Location) -> Unit = { location ->
         if (!TextUtils.isEmpty(location.name)) {
             locationViewModel.setCurrentSelectedLocation(location.name!!)
+            requireActivity().setResult(Activity.RESULT_OK)
+            requireActivity().finish()
         }
-        activity?.onBackPressed()
     }
 
     override fun onStop() {
